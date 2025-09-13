@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
@@ -28,7 +29,7 @@ public class CyberImplantsScreen extends Screen {
     private static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/cyber_menu.png");
     private static final ResourceLocation VOID = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/void.png");
 
-    ImageButton button = null;
+    ImageButton[] buttons = {null, null};
     @Override
     protected void init() {
         super.init();
@@ -37,13 +38,21 @@ public class CyberImplantsScreen extends Screen {
         int y = height/2;
         Player player = Minecraft.getInstance().player;
 
-        button = new ImageButton(x, y, 16, 16, new WidgetSprites(VOID, VOID), but -> {
+        buttons[0] = new ImageButton(x-24, y-12, 24, 24, new WidgetSprites(VOID, VOID), but -> {
             if (true) {
-                new SendCyberPacket();
+                PacketDistributor.sendToServer(new SendCyberPacket("cyber_1"));
             }
         });
-        this.addRenderableWidget(button);
-        button.setTooltip(Tooltip.create(Component.literal("dd")));
+        this.addRenderableWidget(buttons[0]);
+        buttons[0].setTooltip(Tooltip.create(Component.literal("b1")));
+
+        buttons[1] = new ImageButton(x+24, y-12, 24, 24, new WidgetSprites(VOID, VOID), but -> {
+            if (true) {
+                PacketDistributor.sendToServer(new SendCyberPacket("cyber_2"));
+            }
+        });
+        this.addRenderableWidget(buttons[1]);
+        buttons[1].setTooltip(Tooltip.create(Component.literal("b2")));
     }
 
     @Override

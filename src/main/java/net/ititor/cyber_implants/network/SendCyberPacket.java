@@ -1,41 +1,41 @@
 package net.ititor.cyber_implants.network;
 
 import net.ititor.cyber_implants.CyberImplants;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.jetbrains.annotations.NotNull;
 
 public class SendCyberPacket implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<SendCyberPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "add_cyber_to_player"));
     public static final StreamCodec<RegistryFriendlyByteBuf, SendCyberPacket> STREAM_CODEC = CustomPacketPayload.codec(SendCyberPacket::write, SendCyberPacket::new);
 
-    public SendCyberPacket() {
+    private final String implant;
+    public SendCyberPacket(String implant) {
+        this.implant = implant;
     }
 
     public SendCyberPacket(FriendlyByteBuf buf) {
+        this.implant = buf.readUtf();
     }
 
     public void write(FriendlyByteBuf buf) {
+        buf.writeUtf(implant);
     }
 
     public static void handle(SendCyberPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
-                serverPlayer.addTag("cyber_1");
+                serverPlayer.addTag(packet.implant);
             }
         });
     }
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 }
