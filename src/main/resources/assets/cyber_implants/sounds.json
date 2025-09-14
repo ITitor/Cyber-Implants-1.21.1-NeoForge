@@ -1,0 +1,10 @@
+{
+  "glitch": {
+    "sounds": [
+      {
+        "name": "cyber_implants:glitch",
+        "volume": 0.5, "pitch": 1.0
+      }
+    ]
+  }
+}

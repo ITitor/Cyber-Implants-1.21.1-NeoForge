@@ -27,9 +27,8 @@ public class CyberImplantsScreen extends Screen {
     }
 
     private static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/cyber_menu.png");
-    private static final ResourceLocation VOID = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/void.png");
 
-    ImageButton[] buttons = {null, null};
+    ImageButton[] buttons = {null, null, null, null, null, null, null, null};
     @Override
     protected void init() {
         super.init();
@@ -37,22 +36,30 @@ public class CyberImplantsScreen extends Screen {
         int x = width/2;
         int y = height/2;
         Player player = Minecraft.getInstance().player;
+        ResourceLocation res = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/void.png");
+        WidgetSprites widgetSprites = new WidgetSprites(res, res);
 
-        buttons[0] = new ImageButton(x-24, y-12, 24, 24, new WidgetSprites(VOID, VOID), but -> {
-            if (true) {
-                PacketDistributor.sendToServer(new SendCyberPacket("cyber_1"));
-            }
-        });
-        this.addRenderableWidget(buttons[0]);
-        buttons[0].setTooltip(Tooltip.create(Component.literal("b1")));
+        for (int i = 0; i < 4; i++) {
+            int finalI = i;
+            buttons[i] = new ImageButton(x-112+(64*i), y-52, 32, 32, widgetSprites, but -> {
+                if (true) {
+                    PacketDistributor.sendToServer(new SendCyberPacket("cyber_"+ finalI));
+                }
+            });
+            this.addRenderableWidget(buttons[i]);
+            buttons[i].setTooltip(Tooltip.create(Component.literal("b"+i)));
+        }
 
-        buttons[1] = new ImageButton(x+24, y-12, 24, 24, new WidgetSprites(VOID, VOID), but -> {
-            if (true) {
-                PacketDistributor.sendToServer(new SendCyberPacket("cyber_2"));
-            }
-        });
-        this.addRenderableWidget(buttons[1]);
-        buttons[1].setTooltip(Tooltip.create(Component.literal("b2")));
+        for (int i = 4; i < 8; i++) {
+            int finalI = i;
+            buttons[i] = new ImageButton(x-112+(64*(i-4)), y+12, 32, 32, widgetSprites, but -> {
+                if (true) {
+                    PacketDistributor.sendToServer(new SendCyberPacket("cyber_"+ finalI));
+                }
+            });
+            this.addRenderableWidget(buttons[i]);
+            buttons[i].setTooltip(Tooltip.create(Component.literal("b"+i)));
+        }
     }
 
     @Override
@@ -68,6 +75,9 @@ public class CyberImplantsScreen extends Screen {
 
         gui.blit(GUI, x-160, y-100, 0, 0, 320, 200,
                 512, 512);
+
+        gui.blit(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/titan_bone.png"),
+        x-112, y-52, 0, 0, 32, 32, 32, 32);
 
 
         RenderSystem.disableBlend();

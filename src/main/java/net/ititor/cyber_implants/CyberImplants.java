@@ -1,7 +1,9 @@
 package net.ititor.cyber_implants;
 
+import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.item.ModItems;
 import net.ititor.cyber_implants.particle.ModParticles;
+import net.ititor.cyber_implants.sound.ModSounds;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -33,6 +35,8 @@ public class CyberImplants {
 
         ModItems.register(modEventBus);
         ModParticles.register(modEventBus);
+        ModEffects.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
