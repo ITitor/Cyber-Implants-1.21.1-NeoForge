@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 public class CyberImplantItem extends Item {
@@ -30,8 +31,12 @@ public class CyberImplantItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
 
-        if (level.isClientSide) {
-            Minecraft.getInstance().setScreen(new CyberImplantsScreen());
+        if (!player.isShiftKeyDown()) {
+            if (level.isClientSide) {
+                Minecraft.getInstance().setScreen(new CyberImplantsScreen());
+            }
+        }else {
+            player.getTags().forEach(player::removeTag);
         }
 
         return super.use(level, player, usedHand);

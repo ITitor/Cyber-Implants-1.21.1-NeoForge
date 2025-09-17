@@ -1,5 +1,6 @@
 package net.ititor.cyber_implants;
 
+import net.ititor.cyber_implants.data.ModData;
 import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.item.ModItems;
 import net.ititor.cyber_implants.particle.ModParticles;
@@ -37,6 +38,7 @@ public class CyberImplants {
         ModParticles.register(modEventBus);
         ModEffects.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModData.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -55,7 +57,7 @@ public class CyberImplants {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS) {
-            event.accept(ModItems.CYBER_IMPLANT);
+//            event.accept(ModItems.CYBER_IMPLANT);
         }
     }
 

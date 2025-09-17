@@ -11,8 +11,8 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CyberImplants.MOD_ID);
 
 
-    public static final DeferredItem<Item> CYBER_IMPLANT = ITEMS.register("cyber_implant",
-            () -> new CyberImplantItem(new Item.Properties()));
+//    public static final DeferredItem<Item> CYBER_IMPLANT = ITEMS.register("cyber_implant",
+//            () -> new CyberImplantItem(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
