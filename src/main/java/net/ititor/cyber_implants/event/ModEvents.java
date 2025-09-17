@@ -59,7 +59,6 @@ public class ModEvents {
             player.setData(ModData.COOLDOWN0, 0);
         }
 
-
         if (player.getData(ModData.COOLDOWN0) > 0 && player.hasData(ModData.COOLDOWN0)) {
             player.setData(ModData.COOLDOWN0, player.getData(ModData.COOLDOWN0) - 1);
         }

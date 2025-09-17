@@ -6,9 +6,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.ititor.cyber_implants.CyberImplants;
+import net.ititor.cyber_implants.data.ClientData;
 import net.ititor.cyber_implants.effect.ModEffects;
+import net.ititor.cyber_implants.util.ModUtils;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -20,12 +23,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.joml.Math;
 import org.joml.Quaternionf;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -69,6 +76,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onPreRenderHUD(RenderGuiLayerEvent.Pre event) {
         Player player = Minecraft.getInstance().player;
+        Font font = Minecraft.getInstance().font;
         if (player != null) {
             Minecraft mc = Minecraft.getInstance();
             Gui gui = mc.gui;
@@ -77,6 +85,16 @@ public class ClientEvents {
                     CustomHealth(event, 0);
 
                     renderConfusionOverlay(event.getGuiGraphics(), 0.25f);
+                }
+            }
+            if (event.getName() == VanillaGuiLayers.HOTBAR && !mc.options.hideGui  && !player.isSpectator()) {
+                if (ClientData.implant[1]) {
+                    int x = event.getGuiGraphics().guiWidth() / 2;
+                    int y = event.getGuiGraphics().guiHeight() / 2;
+                    LivingEntity target = ModUtils.findTarget(player, 5, true);
+                    if (target != null) {
+                        event.getGuiGraphics().drawCenteredString(font, "Health: "+String.format("%.1f",target.getHealth()), x, y + 120, Color.WHITE.getRGB());
+                    }
                 }
             }
         }

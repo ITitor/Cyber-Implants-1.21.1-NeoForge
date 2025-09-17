@@ -32,6 +32,8 @@ public class ModUtils {
         public BufferBuilder begin(Tesselator tesselator, TextureManager manager) {
             RenderSystem.depthMask(true);
             RenderSystem.disableDepthTest();
+            RenderSystem.disableCull();
+            RenderSystem.disableColorLogicOp();
 
             RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
             RenderSystem.enableBlend();

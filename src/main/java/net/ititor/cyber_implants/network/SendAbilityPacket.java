@@ -39,6 +39,7 @@ public class SendAbilityPacket implements CustomPacketPayload {
             if (context.player() instanceof ServerPlayer player) {
                 Level level = player.level();
 
+                //X-Ray
                 if (packet.id == 0 && player.getData(ModData.COOLDOWN0) <= 0) {
                     for (int x = -15; x <= 15; x++) {
                     for (int y = -15; y <= 15; y++) {
@@ -136,9 +137,10 @@ public class SendAbilityPacket implements CustomPacketPayload {
                                     }
                                 }
                     }}}
+
+                    player.setData(ModData.COOLDOWN0, packet.cd0);
                 }
 
-                player.setData(ModData.COOLDOWN0, packet.cd0);
             }
         });
     }

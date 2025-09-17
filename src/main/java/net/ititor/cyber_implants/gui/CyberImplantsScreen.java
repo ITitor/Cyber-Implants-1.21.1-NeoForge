@@ -47,7 +47,7 @@ public class CyberImplantsScreen extends Screen {
                 int finalI = i;
                 createButton(buttons[i], x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
-                        PacketDistributor.sendToServer(new SendCyberPacket(false));
+                        PacketDistributor.sendToServer(new SendCyberPacket(false, 0));
                         page = finalI+1;
                         init();
                     }
@@ -58,7 +58,7 @@ public class CyberImplantsScreen extends Screen {
                 int finalI = i;
                 createButton(buttons[i], x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
                     if (true) {
-                        PacketDistributor.sendToServer(new SendCyberPacket(false));
+                        PacketDistributor.sendToServer(new SendCyberPacket(false, 0));
                         page = finalI+1;
                         init();
                     }
@@ -67,24 +67,23 @@ public class CyberImplantsScreen extends Screen {
         }
         else if (page == 1){
             for (int i = 0; i < 3; i++) {
+                int finalI = i;
                 createButton(buttons1[i], x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
-                        PacketDistributor.sendToServer(new SendCyberPacket(true));
+                        PacketDistributor.sendToServer(new SendCyberPacket(true, finalI));
                         init();
                     }
                 }, "tooltip.cyber_implants.implant" + i, i);
-                break;
             }
 
-            for (int i = 3; i < 6; i++) {
-                createButton(buttons1[i], x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
-                    if (true) {
-                        PacketDistributor.sendToServer(new SendCyberPacket(true));
-                        init();
-                    }
-                }, "tooltip.cyber_implants.implant" + i);
-                break;
-            }
+//            for (int i = 3; i < 6; i++) {
+//                createButton(buttons1[i], x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
+//                    if (true) {
+//                        PacketDistributor.sendToServer(new SendCyberPacket(true, ));
+//                        init();
+//                    }
+//                }, "tooltip.cyber_implants.implant" + i);
+//            }
         }
     }
 
