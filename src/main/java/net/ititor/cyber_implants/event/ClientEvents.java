@@ -14,14 +14,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -79,7 +85,7 @@ public class ClientEvents {
         Font font = Minecraft.getInstance().font;
         if (player != null) {
             Minecraft mc = Minecraft.getInstance();
-            Gui gui = mc.gui;
+            GuiGraphics gui = event.getGuiGraphics();
             if (event.getName() == VanillaGuiLayers.PLAYER_HEALTH && !mc.options.hideGui && !player.isCreative() && !player.isSpectator()) {
                 if (player.hasEffect(ModEffects.CYBERPSYCHOSIS)) {
                     CustomHealth(event, 0);
@@ -89,14 +95,81 @@ public class ClientEvents {
             }
             if (event.getName() == VanillaGuiLayers.HOTBAR && !mc.options.hideGui  && !player.isSpectator()) {
                 if (ClientData.implant[1]) {
-                    int x = event.getGuiGraphics().guiWidth() / 2;
-                    int y = event.getGuiGraphics().guiHeight() / 2;
-                    LivingEntity target = ModUtils.findTarget(player, 5, true);
+                    int x = event.getGuiGraphics().guiWidth();
+                    int y = event.getGuiGraphics().guiHeight();
+                    LivingEntity target = ModUtils.findTarget(player, 40, true);
                     if (target != null) {
-                        event.getGuiGraphics().drawCenteredString(font, "Health: "+String.format("%.1f",target.getHealth()), x, y + 120, Color.WHITE.getRGB());
+
+                        gui.pose().pushPose();
+                        gui.pose().scale(0.85f, 0.85f, 0.85f);
+                        y = (int)(event.getGuiGraphics().guiHeight() / 0.85f);
+                        if (target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){y+=(int)(18);}
+                        if (target.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){y+=(int)(18);}
+                        if (target.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){y+=(int)(18);}
+                        if (target.getItemBySlot(EquipmentSlot.FEET).isEmpty()){y+=(int)(18);}
+                        if (target.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()){y+=(int)(18);}
+                        if (target.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()){y+=(int)(18);}
+
+                        {
+                            String text = Component.translatable("component.cyber_implants.name").getString() + target.getDisplayName().getString();
+                            gui.drawString(font, text, 2, y - 118 - 12, Color.WHITE.getRGB());
+                        }
+                        {
+                            String text = Component.translatable("component.cyber_implants.health").getString() + String.format("%.1f", target.getHealth());
+                            gui.drawString(font, text, 2, y - 108 - 12, Color.WHITE.getRGB());
+                        }
+
+                        renderSlot(gui, target, EquipmentSlot.HEAD, 2, y-96-12);
+                        if (target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){y-=18;}
+                        renderSlot(gui, target, EquipmentSlot.CHEST, 2, y-80-10);
+                        if (target.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){y-=18;}
+                        renderSlot(gui, target, EquipmentSlot.LEGS, 2, y-64-8);
+                        if (target.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){y-=18;}
+                        renderSlot(gui, target, EquipmentSlot.FEET, 2, y-48-6);
+                        if (target.getItemBySlot(EquipmentSlot.FEET).isEmpty()){y-=18;}
+
+                        renderSlot(gui, target, EquipmentSlot.MAINHAND, 2, y-32-4);
+                        if (target.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()){y-=18;}
+                        if (target instanceof Player targPlayer) {
+                            if (target.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ProjectileWeaponItem item) {
+                                String text = (target.getItemBySlot(EquipmentSlot.MAINHAND).getMaxDamage() - target.getItemBySlot(EquipmentSlot.MAINHAND).getDamageValue()) + "";
+                                gui.renderItem(new ItemStack(Items.ARROW), 22 + (text.length() * 2), y - 32 - 2);
+
+                                int arrow = 0;
+                                for (int i = 0; i < targPlayer.getInventory().getContainerSize(); i++){
+                                    if (targPlayer.getInventory().getItem(i).is(ItemTags.ARROWS)){
+                                        arrow+=targPlayer.getInventory().getItem(i).getCount();
+                                    }
+                                }
+
+                                gui.drawString(font, arrow+"", 22 + (text.length() * 2), y - 32 - 2 + 3, Color.WHITE.getRGB());
+                            }
+                        }
+
+                        renderSlot(gui, target, EquipmentSlot.OFFHAND, 2, y-16-2);
+
+                        gui.pose().popPose();
                     }
                 }
             }
+        }
+    }
+    private static void renderSlot(GuiGraphics gui, LivingEntity target, EquipmentSlot slot, int x, int y){
+        Font font = Minecraft.getInstance().font;
+
+        gui.renderItem(target.getItemBySlot(slot), x, y);
+        if (target.getItemBySlot(slot).isDamageableItem()){
+            gui.pose().pushPose();
+            gui.pose().translate(0, 0, 0);
+            String text = (target.getItemBySlot(slot).getMaxDamage()-target.getItemBySlot(slot).getDamageValue())+"";
+            gui.drawString(font, text, x+18, y+4, Color.WHITE.getRGB());
+            gui.pose().popPose();
+        }else if (target.getItemBySlot(slot).getCount() > 1){
+            gui.pose().pushPose();
+            gui.pose().translate(0, 0, 0);
+            String text = (target.getItemBySlot(slot).getCount())+"";
+            gui.drawString(font, text, x+18, y+4, Color.WHITE.getRGB());
+            gui.pose().popPose();
         }
     }
 

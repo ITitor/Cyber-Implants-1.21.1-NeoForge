@@ -66,7 +66,7 @@ public class CyberImplantsScreen extends Screen {
             }
         }
         else if (page == 1){
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 int finalI = i;
                 createButton(buttons1[i], x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
@@ -124,14 +124,12 @@ public class CyberImplantsScreen extends Screen {
 //            gui.blit(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "textures/gui/titan_bone.png"),
 //                    x - 112 +16, y - 52, 0, 0, 32, 32, 32, 32);
         }else if (page == 1){
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 gui.blit(GUI, x - 114 +16 + (80 * i), y - 54, 350, 14, 36, 40, 640, 640);
-                break;
             }
-            for (int i = 3; i < 6; i++) {
-                gui.blit(GUI, x - 114 +16 + (80 * (i - 3)), y + 10, 350, 14, 36, 40, 640, 640);
-                break;
-            }
+//            for (int i = 3; i < 6; i++) {
+//                gui.blit(GUI, x - 114 +16 + (80 * (i - 3)), y + 10, 350, 14, 36, 40, 640, 640);
+//            }
 
         }
 

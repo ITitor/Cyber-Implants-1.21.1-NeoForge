@@ -1,7 +1,7 @@
 {
   "effect.cyber_implants.cyberpsychosis": "Cyberpsychosis",
 
-  "tooltip.cyber_implants.button0": "Глазные Импланты",
+  "tooltip.cyber_implants.button0": "Зрительные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
   "tooltip.cyber_implants.button2": "Тактильные и Кожные Импланты",
   "tooltip.cyber_implants.button3": "Нейронные и Когнитивные Импланты",
@@ -9,6 +9,10 @@
   "tooltip.cyber_implants.button5": "Системные Импланты",
 
   "tooltip.cyber_implants.implant0": "Спектральный Анализ",
+  "tooltip.cyber_implants.implant1": "Тактик",
+
+  "component.cyber_implants.name": "Name: ",
+  "component.cyber_implants.health": "Health: ",
 
   "key.category.cyber_implants": "Cyber Implants",
   "key.cyber_implants.gui": "GUI",
