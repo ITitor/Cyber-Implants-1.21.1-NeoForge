@@ -72,11 +72,11 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void onClone(LivingIncomingDamageEvent event) {
+    public static void onDamageIncoming(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
 
         if (entity.getData(ModData.IMPLANT1)){
-            if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 100){
+            if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 10){ //10% chance
                 entity.level().playSound((Player) null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP,
                         SoundSource.MASTER, 0.75F, 1.15F);
                 event.setCanceled(true);

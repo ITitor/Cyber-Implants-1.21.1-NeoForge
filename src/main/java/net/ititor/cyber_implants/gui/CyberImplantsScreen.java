@@ -45,9 +45,10 @@ public class CyberImplantsScreen extends Screen {
         if (page == 0) {
             for (int i = 0; i < 3; i++) {
                 int finalI = i;
-                createButton(buttons[i], x - 112 + 16 + (80 * i), y - 52, but -> {
+                createButton(i, x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
                         PacketDistributor.sendToServer(new SendCyberPacket(false, 0));
+                        PacketDistributor.sendToServer(new SendCyberPacket(false, 1));
                         page = finalI+1;
                         init();
                     }
@@ -56,9 +57,10 @@ public class CyberImplantsScreen extends Screen {
 
             for (int i = 3; i < 6; i++) {
                 int finalI = i;
-                createButton(buttons[i], x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
+                createButton(i, x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
                     if (true) {
                         PacketDistributor.sendToServer(new SendCyberPacket(false, 0));
+                        PacketDistributor.sendToServer(new SendCyberPacket(false, 1));
                         page = finalI+1;
                         init();
                     }
@@ -68,12 +70,11 @@ public class CyberImplantsScreen extends Screen {
         else if (page == 1){
             for (int i = 0; i < 2; i++) {
                 int finalI = i;
-                createButton(buttons1[i], x - 112 + 16 + (80 * i), y - 52, but -> {
+                createButton1(i, x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
                         PacketDistributor.sendToServer(new SendCyberPacket(true, finalI));
-                        init();
                     }
-                }, "tooltip.cyber_implants.implant" + i, i);
+                }, "tooltip.cyber_implants.implant" + i);
             }
 
 //            for (int i = 3; i < 6; i++) {
@@ -87,16 +88,15 @@ public class CyberImplantsScreen extends Screen {
         }
     }
 
-    private void createButton(Button voidButton, int x, int y, Button.OnPress press, String tooltip){
-        voidButton = new VoidButton(x, y, 32, 32, press);
-        this.addRenderableWidget(voidButton);
-        voidButton.setTooltip(Tooltip.create(Component.translatable(tooltip)));
+    private void createButton(int button, int x, int y, Button.OnPress press, String tooltip){
+        buttons[button] = new VoidButton(x, y, 32, 32, press);
+        this.addRenderableWidget(buttons[button]);
+        buttons[button].setTooltip(Tooltip.create(Component.translatable(tooltip)));
     }
-    private void createButton(Button voidButton, int x, int y, Button.OnPress press, String tooltip, int id){
-        voidButton = new VoidButton(x, y, 32, 32, press);
-        this.addRenderableWidget(voidButton);
-        voidButton.setTooltip(Tooltip.create(Component.translatable(tooltip)));
-        voidButton.active = !ClientData.implant[id];
+    private void createButton1(int button, int x, int y, Button.OnPress press, String tooltip){
+        buttons1[button] = new VoidButton(x, y, 32, 32, press);
+        this.addRenderableWidget(buttons1[button]);
+        buttons1[button].setTooltip(Tooltip.create(Component.translatable(tooltip)));
     }
 
     @Override
@@ -124,6 +124,9 @@ public class CyberImplantsScreen extends Screen {
 //            gui.blit(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "textures/gui/titan_bone.png"),
 //                    x - 112 +16, y - 52, 0, 0, 32, 32, 32, 32);
         }else if (page == 1){
+            gui.blit(GUI, x+80, y-92, 352, 64, 72, 152,
+                    640, 640);
+
             for (int i = 0; i < 2; i++) {
                 gui.blit(GUI, x - 114 +16 + (80 * i), y - 54, 350, 14, 36, 40, 640, 640);
             }
@@ -139,7 +142,18 @@ public class CyberImplantsScreen extends Screen {
 
         /**debug**/
 
+        active();
         RenderSystem.disableBlend();
+    }
+
+    private void active(){
+        for (int i = 0; i <= 1; i++) {
+            if (ClientData.implant[i] && buttons1[i] != null) {
+                buttons1[i].active = false;
+            } else if (!ClientData.implant[i] && buttons1[i] != null) {
+                buttons1[i].active = true;
+            }
+        }
     }
 
     @Override
