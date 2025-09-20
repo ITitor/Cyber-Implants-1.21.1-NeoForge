@@ -17,6 +17,7 @@ public class ModData {
             "implant0", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );public static final Supplier<AttachmentType<Integer>> IMPLANT1 = ATTACHMENT_TYPES.register(
             "implant1", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+
     );public static final Supplier<AttachmentType<Integer>> IMPLANT2 = ATTACHMENT_TYPES.register(
             "implant2", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );public static final Supplier<AttachmentType<Integer>> IMPLANT3 = ATTACHMENT_TYPES.register(
@@ -27,6 +28,12 @@ public class ModData {
 
     public static final Supplier<AttachmentType<Integer>> COOLDOWN0 = ATTACHMENT_TYPES.register(
             "cooldown0", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+    public static final Supplier<AttachmentType<Integer>> COOLDOWN1 = ATTACHMENT_TYPES.register(
+            "cooldown1", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+    public static final Supplier<AttachmentType<Integer>> COOLDOWN2 = ATTACHMENT_TYPES.register(
+            "cooldown2", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
 
 

@@ -34,6 +34,7 @@ public class SendAbilityPacket implements CustomPacketPayload {
 
 
     private final int cd0 = 100;
+    private final int cd1 = 100;
     public static void handle(SendAbilityPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
@@ -139,6 +140,12 @@ public class SendAbilityPacket implements CustomPacketPayload {
                     }}}
 
                     player.setData(ModData.COOLDOWN0, packet.cd0);
+                }
+                if (packet.id == 1 && player.getData(ModData.COOLDOWN1) <= 0) {
+
+                    //Dash
+
+                    player.setData(ModData.COOLDOWN1, packet.cd1);
                 }
 
             }

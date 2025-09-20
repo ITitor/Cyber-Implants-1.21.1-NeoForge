@@ -25,6 +25,7 @@ public class ResetCommand {
         player.setData(ModData.IMPLANT1, 0);
         player.setData(ModData.IMPLANT2, 0);
         player.setData(ModData.IMPLANT3, 0);
+        player.setData(ModData.IMPLANT4, 0);
 
 
 //        context.getSource().sendSuccess(() -> {

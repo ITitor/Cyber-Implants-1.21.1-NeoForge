@@ -64,10 +64,31 @@ public class ModEvents {
 
         if (!player.hasData(ModData.COOLDOWN0)) {
             player.setData(ModData.COOLDOWN0, 0);
+        }if (!player.hasData(ModData.COOLDOWN1)) {
+            player.setData(ModData.COOLDOWN1, 0);
+        }if (!player.hasData(ModData.COOLDOWN2)) {
+            player.setData(ModData.COOLDOWN2, 0);
         }
 
+        // Спектральный Анализ
         if (player.getData(ModData.COOLDOWN0) > 0 && player.hasData(ModData.COOLDOWN0)) {
             player.setData(ModData.COOLDOWN0, player.getData(ModData.COOLDOWN0) - 1);
+        }
+        //Импульсный Ускоритель
+        if (player.getData(ModData.COOLDOWN1) > 0 && player.hasData(ModData.COOLDOWN1)) {
+            player.setData(ModData.COOLDOWN1, player.getData(ModData.COOLDOWN1) - 1);
+        }
+        if (player.getData(ModData.COOLDOWN2) > 0 && player.hasData(ModData.COOLDOWN2)) {
+            player.setData(ModData.COOLDOWN2, player.getData(ModData.COOLDOWN2) - 1);
+        }
+
+        // Ингибитор Токсинов
+        if (player.getData(ModData.IMPLANT3) > 0){
+            if (player.hasEffect(MobEffects.HUNGER)){player.removeEffect(MobEffects.HUNGER);}
+            if (player.hasEffect(MobEffects.POISON)){player.removeEffect(MobEffects.POISON);}
+            if (player.hasEffect(MobEffects.WITHER)){player.removeEffect(MobEffects.WITHER);}
+            if (player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)){player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);}
+            if (player.hasEffect(MobEffects.WEAKNESS)){player.removeEffect(MobEffects.WEAKNESS);}
         }
     }
 
@@ -75,20 +96,19 @@ public class ModEvents {
     public static void onDamageIncoming(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
 
-        // Тактик - 10% на уворот
-        if (entity.getData(ModData.IMPLANT1) > 0){
-            if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 10){ //10% chance
-                entity.level().playSound((Player) null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP,
-                        SoundSource.MASTER, 0.75F, 1.15F);
-                event.setCanceled(true);
-            }
-        }
-
         // Титановый скелет - -10% урона
         if (entity.getData(ModData.IMPLANT2) > 0){
             event.setAmount(event.getOriginalAmount() * 0.9f);
         }
 
+        // Тактик - 10% на уворот
+        if (entity.getData(ModData.IMPLANT1) > 0){
+            if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 10){
+                entity.level().playSound((Player) null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP,
+                        SoundSource.MASTER, 0.75F, 1.15F);
+                event.setCanceled(true);
+            }
+        }
     }
 
     @SubscribeEvent

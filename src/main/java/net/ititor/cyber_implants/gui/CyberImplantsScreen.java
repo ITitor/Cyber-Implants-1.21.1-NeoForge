@@ -97,7 +97,31 @@ public class CyberImplantsScreen extends Screen {
                         tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI+2))
                         .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
 
-                        open = finalI;
+                        open = finalI+2;
+
+                        if (drawTooltip){
+                            upButton = new VoidButton(x + 105 - 20, y + 60, 40, 12, upBut -> {
+                                if (true) {
+                                    PacketDistributor.sendToServer(new SendCyberPacket(1, finalI+2));
+                                }
+                            });
+                            this.addRenderableWidget(upButton);
+                            upButton.setTooltip(Tooltip.create(Component.translatable("component.cyber_implants.upgrade")));
+                        }else if (upButton != null){
+                            this.removeWidget(upButton);
+                        }
+                    }
+                }, "tooltip.cyber_implants.implant" + (i+2));
+            }
+            for (int i = 2; i < 3; i++) {
+                int finalI = i;
+                createButton1(i, x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
+                    if (true) {
+                        if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI+2))
+                        .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
+
+                        open = finalI+2;
 
                         if (drawTooltip){
                             upButton = new VoidButton(x + 105 - 20, y + 60, 40, 12, upBut -> {
@@ -177,6 +201,10 @@ public class CyberImplantsScreen extends Screen {
             for (int i = 0; i < 2; i++) {
                 gui.blit(GUI, x - 114 +16 + (80 * i), y - 54, 350, 14, 36, 40, 640, 640);
             }
+            for (int i = 3; i < 6; i++) {
+                gui.blit(GUI, x - 114 +16 + (80 * (i - 3)), y + 10, 350, 14, 36, 40, 640, 640);
+                break;
+            }
             drawTooltip(gui, x, y);
         }
 
@@ -189,7 +217,7 @@ public class CyberImplantsScreen extends Screen {
     }
 
     private void active(){
-        for (int i = 0; i <= 1; i++) {
+        for (int i = 0; i <= 4; i++) {
             if (ClientData.implant[i] > 0 && open == i && upButton != null) {
                 upButton.active = false;
             } else if (ClientData.implant[i] <= 0 && open == i && upButton != null) {
