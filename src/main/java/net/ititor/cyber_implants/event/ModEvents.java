@@ -75,12 +75,18 @@ public class ModEvents {
     public static void onDamageIncoming(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
 
-        if (entity.getData(ModData.IMPLANT1)){
+        // Тактик - 10% на уворот
+        if (entity.getData(ModData.IMPLANT1) > 0){
             if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 10){ //10% chance
                 entity.level().playSound((Player) null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP,
                         SoundSource.MASTER, 0.75F, 1.15F);
                 event.setCanceled(true);
             }
+        }
+
+        // Титановый скелет - -10% урона
+        if (entity.getData(ModData.IMPLANT2) > 0){
+            event.setAmount(event.getOriginalAmount() * 0.9f);
         }
 
     }

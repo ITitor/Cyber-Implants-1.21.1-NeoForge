@@ -44,7 +44,7 @@ public class KeyBindingEvent {
             if (GUI.isDown()){
                 Minecraft.getInstance().setScreen(new CyberImplantsScreen());
             }
-            if (ABILITY.isDown() && ClientData.implant[0]){
+            if (ABILITY.isDown() && ClientData.implant[0] > 0){
                 PacketDistributor.sendToServer(new SendAbilityPacket(0));
             }
         }

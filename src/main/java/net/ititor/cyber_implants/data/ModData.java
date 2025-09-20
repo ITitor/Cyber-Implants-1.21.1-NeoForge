@@ -13,16 +13,16 @@ import java.util.function.Supplier;
 public class ModData {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CyberImplants.MOD_ID);
 
-    public static final Supplier<AttachmentType<Boolean>> IMPLANT0 = ATTACHMENT_TYPES.register(
-            "implant0", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
-    );public static final Supplier<AttachmentType<Boolean>> IMPLANT1 = ATTACHMENT_TYPES.register(
-            "implant1", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
-    );public static final Supplier<AttachmentType<Boolean>> IMPLANT2 = ATTACHMENT_TYPES.register(
-            "implant2", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
-    );public static final Supplier<AttachmentType<Boolean>> IMPLANT3 = ATTACHMENT_TYPES.register(
-            "implant3", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
-    );public static final Supplier<AttachmentType<Boolean>> IMPLANT4 = ATTACHMENT_TYPES.register(
-            "implant4", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
+    public static final Supplier<AttachmentType<Integer>> IMPLANT0 = ATTACHMENT_TYPES.register(
+            "implant0", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> IMPLANT1 = ATTACHMENT_TYPES.register(
+            "implant1", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> IMPLANT2 = ATTACHMENT_TYPES.register(
+            "implant2", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> IMPLANT3 = ATTACHMENT_TYPES.register(
+            "implant3", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> IMPLANT4 = ATTACHMENT_TYPES.register(
+            "implant4", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
 
     public static final Supplier<AttachmentType<Integer>> COOLDOWN0 = ATTACHMENT_TYPES.register(

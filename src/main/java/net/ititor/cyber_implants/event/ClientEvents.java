@@ -94,7 +94,7 @@ public class ClientEvents {
                 }
             }
             if (event.getName() == VanillaGuiLayers.HOTBAR && !mc.options.hideGui  && !player.isSpectator()) {
-                if (ClientData.implant[1]) {
+                if (ClientData.implant[1] > 0) {
                     int x = event.getGuiGraphics().guiWidth();
                     int y = event.getGuiGraphics().guiHeight();
                     LivingEntity target = ModUtils.findTarget(player, 40, true);

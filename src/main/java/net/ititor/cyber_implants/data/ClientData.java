@@ -2,7 +2,7 @@ package net.ititor.cyber_implants.data;
 
 public class ClientData {
 
-    public static boolean[] implant = {false, false, false, false, false, false, false, false, false, false};
+    public static int[] implant = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 //    public static void setImplant(int implant) {
 //        ClientData.implant = implant;

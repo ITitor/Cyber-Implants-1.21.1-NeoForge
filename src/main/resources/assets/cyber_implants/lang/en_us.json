@@ -11,6 +11,13 @@
   "tooltip.cyber_implants.implant0": "Спектральный Анализ",
   "tooltip.cyber_implants.implant1": "Тактик",
 
+  "tooltip.cyber_implants.implant2": "Титановый Скелет",
+  "tooltip.cyber_implants.implant3": "3",
+
+  "component.cyber_implants.upgrade": "Улучшить",
+
+
+
   "component.cyber_implants.name": "Name: ",
   "component.cyber_implants.health": "Health: ",
 

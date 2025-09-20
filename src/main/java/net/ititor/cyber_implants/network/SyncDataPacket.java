@@ -14,21 +14,21 @@ public class SyncDataPacket implements CustomPacketPayload {
     public static final Type<SyncDataPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "sync_data"));
     public static final StreamCodec<RegistryFriendlyByteBuf, SyncDataPacket> STREAM_CODEC = CustomPacketPayload.codec(SyncDataPacket::write, SyncDataPacket::new);
 
-    private final boolean implant;
+    private final int implant;
     private final int id;
 
-    public SyncDataPacket(boolean implant, int id) {
+    public SyncDataPacket(int implant, int id) {
         this.implant = implant;
         this.id = id;
     }
 
     public SyncDataPacket(FriendlyByteBuf buf) {
-        this.implant = buf.readBoolean();
+        this.implant = buf.readInt();
         this.id = buf.readInt();
     }
 
     public void write(FriendlyByteBuf buf) {
-        buf.writeBoolean(implant);
+        buf.writeInt(implant);
         buf.writeInt(id);
     }
 
