@@ -11,6 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -33,15 +34,15 @@ public class SendAbilityPacket implements CustomPacketPayload {
     }
 
 
-    private final int cd0 = 100;
-    private final int cd1 = 100;
+    public static final int cd0 = 100;
+    public static final int cd1 = 60;
     public static void handle(SendAbilityPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
                 Level level = player.level();
 
                 //X-Ray
-                if (packet.id == 0 && player.getData(ModData.COOLDOWN0) <= 0) {
+                if (player.getData(ModData.IMPLANT0) > 0 && player.getData(ModData.COOLDOWN0) <= 0 && player.getData(ModData.SELECT_ABILITY) == 0) {
                     for (int x = -15; x <= 15; x++) {
                     for (int y = -15; y <= 15; y++) {
                     for (int z = -15; z <= 15; z++) {
@@ -141,9 +142,16 @@ public class SendAbilityPacket implements CustomPacketPayload {
 
                     player.setData(ModData.COOLDOWN0, packet.cd0);
                 }
-                if (packet.id == 1 && player.getData(ModData.COOLDOWN1) <= 0) {
+                if (player.getData(ModData.IMPLANT4) > 0 && player.getData(ModData.COOLDOWN1) <= 0 && player.getData(ModData.SELECT_ABILITY) == 1) {
 
                     //Dash
+//                    float f1 = (float) Math.cos(Math.toRadians(player.getYRot() + 90));
+//                    float f2 = (float) Math.sin(Math.toRadians(player.getYRot() + 90));
+//                    if (player.onGround()) {
+//                        player.push(f1 * 1.5, 0, f2 * 1.5);// 1x - 2 block dash
+//                    } else {
+//                        player.push(f1 * 0.75, 0, f2 * 0.75);// 1x - 2 block dash
+//                    }
 
                     player.setData(ModData.COOLDOWN1, packet.cd1);
                 }

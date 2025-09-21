@@ -37,6 +37,11 @@ public class ModData {
     );
 
 
+    public static final Supplier<AttachmentType<Integer>> SELECT_ABILITY = ATTACHMENT_TYPES.register(
+            "select_ability", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+
+
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }

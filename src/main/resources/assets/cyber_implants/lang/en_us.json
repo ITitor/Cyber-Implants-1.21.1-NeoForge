@@ -18,11 +18,11 @@
   "component.cyber_implants.upgrade": "Улучшить",
 
 
-
   "component.cyber_implants.name": "Name: ",
   "component.cyber_implants.health": "Health: ",
 
   "key.category.cyber_implants": "Cyber Implants",
   "key.cyber_implants.gui": "GUI",
-  "key.cyber_implants.ability": "Ability"
+  "key.cyber_implants.ability": "Ability",
+  "key.cyber_implants.ability1": "Ability 1"
 }

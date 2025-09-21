@@ -34,7 +34,13 @@ public class SyncDataPacket implements CustomPacketPayload {
 
     public static void handle(SyncDataPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            ClientData.implant[packet.id] = packet.implant;
+            if (packet.id == 100) {
+                ClientData.selectAbility = packet.implant;
+            }else if (packet.id >= 10) {
+                ClientData.cooldown[packet.id - 10] = packet.implant;
+            }else {
+                ClientData.implant[packet.id] = packet.implant;
+            }
         });
     }
 

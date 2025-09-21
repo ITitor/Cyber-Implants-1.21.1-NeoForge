@@ -26,7 +26,7 @@ public class CyberImplantsScreen extends Screen {
         super(Component.literal(""));
     }
 
-    private static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/cyber_menu.png");
+    public static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID,"textures/gui/cyber_menu.png");
     Button[] buttons = {null, null, null, null, null, null, null, null, null, null};
     Button[] buttons1 = {null, null, null, null, null, null, null, null, null, null};
     Button upButton = null;
@@ -51,7 +51,6 @@ public class CyberImplantsScreen extends Screen {
                     }
                 }, "tooltip.cyber_implants.button" + i);
             }
-
             for (int i = 3; i < 6; i++) {
                 int finalI = i;
                 createButton(i, x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
@@ -90,19 +89,19 @@ public class CyberImplantsScreen extends Screen {
             createBackButton(x, y);
         }else if (page == 2){
             for (int i = 0; i < 2; i++) {
-                int finalI = i;
+                int finalI = i+2;
                 createButton1(i, x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
                         if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
-                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI+2))
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI))
                         .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
 
-                        open = finalI+2;
+                        open = finalI;
 
                         if (drawTooltip){
                             upButton = new VoidButton(x + 105 - 20, y + 60, 40, 12, upBut -> {
                                 if (true) {
-                                    PacketDistributor.sendToServer(new SendCyberPacket(1, finalI+2));
+                                    PacketDistributor.sendToServer(new SendCyberPacket(1, finalI));
                                 }
                             });
                             this.addRenderableWidget(upButton);
@@ -113,20 +112,20 @@ public class CyberImplantsScreen extends Screen {
                     }
                 }, "tooltip.cyber_implants.implant" + (i+2));
             }
-            for (int i = 2; i < 3; i++) {
-                int finalI = i;
+            for (int i = 3; i < 4; i++) {
+                int finalI = i+1;
                 createButton1(i, x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
                     if (true) {
                         if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
-                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI+2))
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI))
                         .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
 
-                        open = finalI+2;
+                        open = finalI;
 
                         if (drawTooltip){
                             upButton = new VoidButton(x + 105 - 20, y + 60, 40, 12, upBut -> {
                                 if (true) {
-                                    PacketDistributor.sendToServer(new SendCyberPacket(1, finalI+2));
+                                    PacketDistributor.sendToServer(new SendCyberPacket(1, finalI));
                                 }
                             });
                             this.addRenderableWidget(upButton);
@@ -135,7 +134,7 @@ public class CyberImplantsScreen extends Screen {
                             this.removeWidget(upButton);
                         }
                     }
-                }, "tooltip.cyber_implants.implant" + (i+2));
+                }, "tooltip.cyber_implants.implant" + (i+1));
             }
             createBackButton(x, y);
         }
@@ -230,7 +229,6 @@ public class CyberImplantsScreen extends Screen {
     private boolean drawTooltip = false;
     private int open = 0;
     Component tooltipComponent = Component.empty();
-
     private void drawTooltip(GuiGraphics gui, int x, int y){
         Font font = Minecraft.getInstance().font;
         if (drawTooltip) {

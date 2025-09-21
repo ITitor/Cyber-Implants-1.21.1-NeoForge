@@ -8,12 +8,15 @@ import com.mojang.math.Axis;
 import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ClientData;
 import net.ititor.cyber_implants.effect.ModEffects;
+import net.ititor.cyber_implants.gui.CyberImplantsScreen;
 import net.ititor.cyber_implants.util.ModUtils;
 import net.minecraft.Util;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -151,9 +154,72 @@ public class ClientEvents {
                         gui.pose().popPose();
                     }
                 }
+
+                if (ClientData.implant[0] > 0 || ClientData.implant[4] > 0){
+                render2Ability(gui, KeyBindingEvent.ABILITY, KeyBindingEvent.ABILITY1, ClientData.selectAbility);
+                }
+
             }
         }
     }
+
+    private static void render2Ability(GuiGraphics gui, /*ItemStack mainHand,*/
+    KeyMapping bind1, KeyMapping bind2,/* ItemStack item, ResourceLocation icon1, ResourceLocation icon2,*/ int id){
+        int x = gui.guiWidth() / 2;
+        int y = gui.guiHeight();
+        Font font = Minecraft.getInstance().font;
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShaderTexture(0, CyberImplantsScreen.GUI);
+        RenderSystem.enableBlend();
+
+        gui.blit(CyberImplantsScreen.GUI, x - 171 + 2, y - 22, 480, 192, 42, 22, 640, 640);
+
+        if (ClientData.cooldown[id] <= 0) {
+            PoseStack stack = gui.pose();
+            String key;
+            key = bind1.getKey().getDisplayName().getString();
+            key = key.replace("Right ", "R");
+            key = key.replace("Left ", "L");
+            key = key.replace("Middle ", "M");
+            key = key.replace("Button", "B");
+            key = key.replace("Control", "Ctrl");
+
+            gui.drawCenteredString(font, key, x - 166 + 12, y - 11, Color.WHITE.getRGB());
+
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+        else {
+            RenderSystem.setShaderColor(0.55F, 0.55F, 0.55F, 1.0F);
+
+            PoseStack stack = gui.pose();
+            Component key;
+
+            key = Component.literal((ClientData.cooldown[id] / 20) + "");
+
+            gui.drawCenteredString(font, key, x - 166 + 12, y - 11, Color.WHITE.getRGB());
+
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+        {
+//            RenderSystem.setShaderTexture(0, icon2);
+//            gui.blit(icon2, (x - xPad) - 50 + 3, (y - yPad) + 17 + 3, 0, 0, 16, 16,
+//                    16, 16);
+
+            PoseStack stack = gui.pose();
+            String key;
+            key = bind2.getKey().getDisplayName().getString();
+            key = key.replace("Right ", "R");
+            key = key.replace("Left ", "L");
+            key = key.replace("Middle ", "M");
+            key = key.replace("Button", "B");
+            key = key.replace("Control", "Ctrl");
+            stack.pushPose();
+            stack.translate(0.5F, 0F, 0F);
+            gui.drawCenteredString(font, key, x - 146 + 12, y - 11, Color.WHITE.getRGB());
+            stack.popPose();
+        }
+    }
+
     private static void renderSlot(GuiGraphics gui, LivingEntity target, EquipmentSlot slot, int x, int y){
         Font font = Minecraft.getInstance().font;
 
@@ -172,7 +238,6 @@ public class ClientEvents {
             gui.pose().popPose();
         }
     }
-
     private static void renderConfusionOverlay(GuiGraphics guiGraphics, float scalar) {
         int i = guiGraphics.guiWidth();
         int j = guiGraphics.guiHeight();

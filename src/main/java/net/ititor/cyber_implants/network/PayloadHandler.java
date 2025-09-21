@@ -15,6 +15,7 @@ public class PayloadHandler {
 
         payloadRegistrar.playToServer(SendCyberPacket.TYPE, SendCyberPacket.STREAM_CODEC, SendCyberPacket::handle);
         payloadRegistrar.playToServer(SendAbilityPacket.TYPE, SendAbilityPacket.STREAM_CODEC, SendAbilityPacket::handle);
+        payloadRegistrar.playToServer(SendSelectAbilityPacket.TYPE, SendSelectAbilityPacket.STREAM_CODEC, SendSelectAbilityPacket::handle);
 
         payloadRegistrar.playToClient(SyncDataPacket.TYPE, SyncDataPacket.STREAM_CODEC, SyncDataPacket::handle);
     }
