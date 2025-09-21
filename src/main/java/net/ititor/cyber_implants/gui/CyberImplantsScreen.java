@@ -185,6 +185,8 @@ public class CyberImplantsScreen extends Screen {
                 gui.blit(GUI, x - 114 +16 + (80 * (i - 3)), y + 10, 350, 14, 36, 40, 640, 640);
             }
 
+            gui.drawCenteredString(font, ClientData.cyber_points+"/??? | "+ClientData.cyber_level, x, y+50, Color.WHITE.getRGB());
+
 //            gui.blit(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "textures/gui/titan_bone.png"),
 //                    x - 112 +16, y - 52, 0, 0, 32, 32, 32, 32);
         }else if (page == 1){

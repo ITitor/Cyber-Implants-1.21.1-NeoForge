@@ -41,6 +41,13 @@ public class ModData {
             "select_ability", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
 
+    public static final Supplier<AttachmentType<Integer>> CYBER_POINTS = ATTACHMENT_TYPES.register(
+            "cyber_points", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+    public static final Supplier<AttachmentType<Integer>> CYBER_LEVEL = ATTACHMENT_TYPES.register(
+            "cyber_level", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
