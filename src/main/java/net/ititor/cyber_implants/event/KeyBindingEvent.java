@@ -10,6 +10,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,6 +19,9 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class KeyBindingEvent {
 
@@ -51,17 +55,30 @@ public class KeyBindingEvent {
             if (GUI.isDown()){
                 Minecraft.getInstance().setScreen(new CyberImplantsScreen());
             }
-            if (ABILITY.isDown()){
+            if (ABILITY.isDown() && ClientData.implant[0] > 0 && ClientData.cooldown[0] <= 0 && ClientData.selectAbility == 0){
                 PacketDistributor.sendToServer(new SendAbilityPacket(0));
             }
-            if (ABILITY.isDown() && ClientData.implant[4] > 0 && ClientData.cooldown[1] <= 0 && ClientData.selectAbility == 1){
+            else if (ABILITY.isDown() && ClientData.implant[4] > 0 && ClientData.cooldown[1] <= 0 && ClientData.selectAbility == 1){
                 float f1 = (float) Math.cos(Math.toRadians(player.getYRot() + 90));
                 float f2 = (float) Math.sin(Math.toRadians(player.getYRot() + 90));
                 if (player.onGround()) {
-                    player.push(f1 * 2.0, 0, f2 * 2.0);// 1x - 2 block dash
-                } else {
-                    player.push(f1 * 0.55, 0, f2 * 0.55);// 1x - 8 block dash
+                    player.addDeltaMovement(new Vec3(f1 * 1.75, 0, f2 * 1.75));// 1x - 2 block dash
+                    /**Timer**/
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        public void run() {
+                            if (!player.onGround()){
+                                player.setDeltaMovement(new Vec3(player.getDeltaMovement().x * 0.25, player.getDeltaMovement().y, player.getDeltaMovement().z * 0.25));// 1x - 2 block dash
+                            }
+                        }
+                    }, 100);
+                    /**Timer**/
+                } else if (!player.onGround() && player.isSprinting()){
+                    player.addDeltaMovement(new Vec3(f1 * 0.50, 0, f2 * 0.50));// /3.6
+                } else if (!player.onGround()){
+                    player.addDeltaMovement(new Vec3(f1 * 0.55, 0, f2 * 0.55));// /3.6
                 }
+                player.hasImpulse = false;
                 PacketDistributor.sendToServer(new SendAbilityPacket(1));
                 ClientData.cooldown[1] = SendAbilityPacket.cd1;
             }

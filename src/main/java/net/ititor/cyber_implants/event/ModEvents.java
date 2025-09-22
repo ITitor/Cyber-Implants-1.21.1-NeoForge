@@ -6,6 +6,7 @@ import net.ititor.cyber_implants.network.SyncDataPacket;
 import net.ititor.cyber_implants.particle.particle.OreParticleOptions;
 import net.ititor.cyber_implants.util.ModUtils;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -120,10 +121,11 @@ public class ModEvents {
                 event.setCanceled(true);
             }
         }
+
     }
 
     @SubscribeEvent
-    public static void onDamageIncoming(PlayerXpEvent.PickupXp event) {
+    public static void onPickupXp(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
 
         player.setData(ModData.CYBER_POINTS, player.getData(ModData.CYBER_POINTS)+event.getOrb().getValue());

@@ -60,15 +60,13 @@ public class CyberImplantsScreen extends Screen {
                     }
                 }, "tooltip.cyber_implants.button" + i);
             }
-        }
-        else if (page == 1){
+        }else if (page == 1){
             for (int i = 0; i < 2; i++) {
                 int finalI = i;
                 createButton1(i, x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
                         if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
-                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + finalI)
-                        .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + finalI);
 
                         open = finalI;
 
@@ -80,21 +78,17 @@ public class CyberImplantsScreen extends Screen {
                             });
                             this.addRenderableWidget(upButton);
                             upButton.setTooltip(Tooltip.create(Component.translatable("component.cyber_implants.upgrade")));
-                        }else if (upButton != null){
-                            this.removeWidget(upButton);
-                        }
+                        }else if (upButton != null){this.removeWidget(upButton);}
                     }
                 }, "tooltip.cyber_implants.implant" + i);
             }
-            createBackButton(x, y);
         }else if (page == 2){
             for (int i = 0; i < 2; i++) {
                 int finalI = i+2;
                 createButton1(i, x - 112 + 16 + (80 * i), y - 52, but -> {
                     if (true) {
                         if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
-                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI))
-                        .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI));
 
                         open = finalI;
 
@@ -106,9 +100,7 @@ public class CyberImplantsScreen extends Screen {
                             });
                             this.addRenderableWidget(upButton);
                             upButton.setTooltip(Tooltip.create(Component.translatable("component.cyber_implants.upgrade")));
-                        }else if (upButton != null){
-                            this.removeWidget(upButton);
-                        }
+                        }else if (upButton != null){this.removeWidget(upButton);}
                     }
                 }, "tooltip.cyber_implants.implant" + (i+2));
             }
@@ -117,8 +109,7 @@ public class CyberImplantsScreen extends Screen {
                 createButton1(i, x - 112 + 16 + (80 * (i-3)), y + 12, but -> {
                     if (true) {
                         if (open == finalI || !drawTooltip) {drawTooltip = !drawTooltip;}
-                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI))
-                        .append(Component.literal(" DDDDD Uwu dDDudUDUau fjhafh"));
+                        tooltipComponent = Component.translatable("tooltip.cyber_implants.implant" + (finalI));
 
                         open = finalI;
 
@@ -130,12 +121,13 @@ public class CyberImplantsScreen extends Screen {
                             });
                             this.addRenderableWidget(upButton);
                             upButton.setTooltip(Tooltip.create(Component.translatable("component.cyber_implants.upgrade")));
-                        }else if (upButton != null){
-                            this.removeWidget(upButton);
-                        }
+                        }else if (upButton != null){this.removeWidget(upButton);}
                     }
                 }, "tooltip.cyber_implants.implant" + (i+1));
             }
+        }
+
+        if (page != 0){
             createBackButton(x, y);
         }
     }
@@ -162,7 +154,6 @@ public class CyberImplantsScreen extends Screen {
 //        backButton.setTooltip(Tooltip.create(Component.translatable(tooltip)));
     }
 
-
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
         super.render(gui, mouseX, mouseY, partialTick);
@@ -185,7 +176,7 @@ public class CyberImplantsScreen extends Screen {
                 gui.blit(GUI, x - 114 +16 + (80 * (i - 3)), y + 10, 350, 14, 36, 40, 640, 640);
             }
 
-            gui.drawCenteredString(font, ClientData.cyber_points+"/??? | "+ClientData.cyber_level, x, y+50, Color.WHITE.getRGB());
+            gui.drawCenteredString(font, ClientData.cyber_points+"/??? | "+ClientData.cyber_level, x, y+80, Color.WHITE.getRGB());
 
 //            gui.blit(ResourceLocation.fromNamespaceAndPath(CyberImplants.MOD_ID, "textures/gui/titan_bone.png"),
 //                    x - 112 +16, y - 52, 0, 0, 32, 32, 32, 32);

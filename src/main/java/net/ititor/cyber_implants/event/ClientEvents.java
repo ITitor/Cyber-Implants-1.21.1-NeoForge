@@ -16,9 +16,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.model.ZombieModel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,10 +29,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -45,6 +51,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.function.Predicate;
 
 
 @EventBusSubscriber(modid = CyberImplants.MOD_ID, value = Dist.CLIENT)
@@ -52,12 +59,13 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onEntityRender(RenderPlayerEvent.Pre event) {
-//        LivingEntity player = event.getEntity();
-//        var model = event.getRenderer().getModel();
+        Player player = event.getEntity();
+        var model = event.getRenderer().getModel();
 //
 //        if (!player.getTags().contains("cyber_1")){
 //            return;
 //        }
+
 
     }
 
