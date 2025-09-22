@@ -3,10 +3,9 @@
 
   "tooltip.cyber_implants.button0": "Окулярные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
-  "tooltip.cyber_implants.button2": "Тактильные и Кожные Импланты",
-  "tooltip.cyber_implants.button3": "Нейронные и Когнитивные Импланты",
-  "tooltip.cyber_implants.button4": "Боевые Импланты",
-  "tooltip.cyber_implants.button5": "Системные Импланты",
+  "tooltip.cyber_implants.button2": "Нейронные и Когнитивные Импланты",
+  "tooltip.cyber_implants.button3": "Боевые Импланты",
+  "tooltip.cyber_implants.button4": "Системные Импланты",
 
   "component.cyber_implants.name": "Имя: ",
   "component.cyber_implants.health": "Здоровье: "

@@ -57,17 +57,17 @@ import java.util.function.Predicate;
 @EventBusSubscriber(modid = CyberImplants.MOD_ID, value = Dist.CLIENT)
 public class ClientEvents {
 
-    @SubscribeEvent
-    public static void onEntityRender(RenderPlayerEvent.Pre event) {
-        Player player = event.getEntity();
-        var model = event.getRenderer().getModel();
+//    @SubscribeEvent
+//    public static void onEntityRender(RenderPlayerEvent.Pre event) {
+//        Player player = event.getEntity();
+//        var model = event.getRenderer().getModel();
+////
+////        if (!player.getTags().contains("cyber_1")){
+////            return;
+////        }
 //
-//        if (!player.getTags().contains("cyber_1")){
-//            return;
-//        }
-
-
-    }
+//
+//    }
 
     @SubscribeEvent
     public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
@@ -163,7 +163,7 @@ public class ClientEvents {
                     }
                 }
 
-                if (ClientData.implant[0] > 0 || ClientData.implant[4] > 0){
+                if (ClientData.implant[0] > 0 || ClientData.implant[5] > 0){
                     render2Ability(gui, KeyBindingEvent.ABILITY, KeyBindingEvent.ABILITY1, ClientData.selectAbility);
                 }
 

@@ -4,12 +4,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.ititor.cyber_implants.data.ModData;
-import net.ititor.cyber_implants.network.SendCyberPacket;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ResetCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -21,11 +19,13 @@ public class ResetCommand {
         Player player = context.getSource().getPlayer();
         ServerLevel level = context.getSource().getLevel();
 
-        player.setData(ModData.IMPLANT0, 0);
-        player.setData(ModData.IMPLANT1, 0);
-        player.setData(ModData.IMPLANT2, 0);
-        player.setData(ModData.IMPLANT3, 0);
-        player.setData(ModData.IMPLANT4, 0);
+        player.setData(ModData.EYE_IMPLANT0, 0);
+        player.setData(ModData.EYE_IMPLANT1, 0);
+        player.setData(ModData.BODY_IMPLANT0, 0);
+        player.setData(ModData.BODY_IMPLANT1, 0);
+        player.setData(ModData.BODY_IMPLANT2, 0);
+
+        player.setData(ModData.CYBER_POINTS, 0);
 
 
 //        context.getSource().sendSuccess(() -> {

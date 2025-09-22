@@ -3,30 +3,18 @@ package net.ititor.cyber_implants.event;
 import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ModData;
 import net.ititor.cyber_implants.network.SyncDataPacket;
-import net.ititor.cyber_implants.particle.particle.OreParticleOptions;
-import net.ititor.cyber_implants.util.ModUtils;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RenderLivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
-import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -58,15 +46,34 @@ public class ModEvents {
 //        }
 
         if (!level.isClientSide) {
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.IMPLANT0), 0));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.IMPLANT1), 1));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.IMPLANT2), 2));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.IMPLANT3), 3));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.IMPLANT4), 4));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.EYE_IMPLANT0), 0));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.EYE_IMPLANT1), 1));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.EYE_IMPLANT2), 2));
 
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN0), 10));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN1), 11));
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN2), 12));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT0), 3));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT1), 4));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT2), 5));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT3), 6));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT4), 7));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.BODY_IMPLANT5), 8));
+
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.NEURAL_IMPLANT0), 9));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.NEURAL_IMPLANT1), 10));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.NEURAL_IMPLANT2), 11));
+
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COMBAT_IMPLANT0), 12));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COMBAT_IMPLANT1), 13));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COMBAT_IMPLANT2), 14));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COMBAT_IMPLANT3), 15));
+
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.SYSTEMIC_IMPLANT0), 16));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.SYSTEMIC_IMPLANT1), 17));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.SYSTEMIC_IMPLANT2), 18));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.SYSTEMIC_IMPLANT3), 19));
+
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN0), 50));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN1), 51));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN2), 52));
 
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_POINTS), 98));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_LEVEL), 99));
@@ -95,7 +102,7 @@ public class ModEvents {
         }
 
         // Ингибитор Токсинов
-        if (player.getData(ModData.IMPLANT3) > 0){
+        if (player.getData(ModData.BODY_IMPLANT1) > 0){
             if (player.hasEffect(MobEffects.HUNGER)){player.removeEffect(MobEffects.HUNGER);}
             if (player.hasEffect(MobEffects.POISON)){player.removeEffect(MobEffects.POISON);}
             if (player.hasEffect(MobEffects.WITHER)){player.removeEffect(MobEffects.WITHER);}
@@ -109,12 +116,12 @@ public class ModEvents {
         LivingEntity entity = event.getEntity();
 
         // Титановый скелет - -10% урона
-        if (entity.getData(ModData.IMPLANT2) > 0){
+        if (entity.getData(ModData.BODY_IMPLANT0) > 0){
             event.setAmount(event.getOriginalAmount() * 0.9f);
         }
 
         // Тактик - 10% на уворот
-        if (entity.getData(ModData.IMPLANT1) > 0){
+        if (entity.getData(ModData.EYE_IMPLANT1) > 0){
             if (event.getSource().getDirectEntity() != null && new Random().nextInt(0, 100) < 10){
                 entity.level().playSound((Player) null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP,
                         SoundSource.MASTER, 0.75F, 1.15F);
@@ -133,16 +140,16 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onClone(PlayerEvent.Clone event) {
-        if (event.isWasDeath() && event.getOriginal().hasData(ModData.IMPLANT0)) {
-            event.getEntity().setData(ModData.IMPLANT0, event.getOriginal().getData(ModData.IMPLANT0));
-        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.IMPLANT1)) {
-            event.getEntity().setData(ModData.IMPLANT1, event.getOriginal().getData(ModData.IMPLANT1));
-        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.IMPLANT2)) {
-            event.getEntity().setData(ModData.IMPLANT2, event.getOriginal().getData(ModData.IMPLANT2));
-        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.IMPLANT3)) {
-            event.getEntity().setData(ModData.IMPLANT3, event.getOriginal().getData(ModData.IMPLANT3));
-        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.IMPLANT4)) {
-            event.getEntity().setData(ModData.IMPLANT4, event.getOriginal().getData(ModData.IMPLANT4));
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.EYE_IMPLANT0)) {
+            event.getEntity().setData(ModData.EYE_IMPLANT0, event.getOriginal().getData(ModData.EYE_IMPLANT0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.EYE_IMPLANT1)) {
+            event.getEntity().setData(ModData.EYE_IMPLANT1, event.getOriginal().getData(ModData.EYE_IMPLANT1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT0)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT0, event.getOriginal().getData(ModData.BODY_IMPLANT0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT1)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT1, event.getOriginal().getData(ModData.BODY_IMPLANT1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT2)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT2, event.getOriginal().getData(ModData.BODY_IMPLANT2));
         }
 
 

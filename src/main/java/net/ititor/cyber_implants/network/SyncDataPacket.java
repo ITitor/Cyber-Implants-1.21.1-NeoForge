@@ -39,8 +39,8 @@ public class SyncDataPacket implements CustomPacketPayload {
                 ClientData.cyber_level = packet.implant;
             }else if (packet.id == 98) {
                 ClientData.cyber_points = packet.implant;
-            }else if (packet.id >= 10) {
-                ClientData.cooldown[packet.id - 10] = packet.implant;
+            }else if (packet.id >= 50) {
+                ClientData.cooldown[packet.id - 50] = packet.implant;
             }else {
                 ClientData.implant[packet.id] = packet.implant;
             }

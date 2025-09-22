@@ -3,20 +3,36 @@
 
   "tooltip.cyber_implants.button0": "Зрительные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
-  "tooltip.cyber_implants.button2": "Тактильные и Кожные Импланты",
-  "tooltip.cyber_implants.button3": "Нейронные и Когнитивные Импланты",
-  "tooltip.cyber_implants.button4": "Боевые Импланты",
-  "tooltip.cyber_implants.button5": "Системные Импланты",
+  "tooltip.cyber_implants.button2": "Нейронные и Когнитивные Импланты",
+  "tooltip.cyber_implants.button3": "Боевые Импланты",
+  "tooltip.cyber_implants.button4": "Системные Импланты",
 
-  "tooltip.cyber_implants.implant0": "Спектральный Анализ",
-  "tooltip.cyber_implants.implant1": "Тактик",
+  "tooltip.cyber_implants.eye_implant0": "Спектральный Анализ",
+  "tooltip.cyber_implants.eye_implant1": "Тактик",
+  "tooltip.cyber_implants.eye_implant2": "???",
 
-  "tooltip.cyber_implants.implant2": "Титановый Скелет",
-  "tooltip.cyber_implants.implant3": "Ингибитор Токсинов",
-  "tooltip.cyber_implants.implant4": "Импульсный Ускоритель",
+  "tooltip.cyber_implants.body_implant0": "Титановый Скелет",
+  "tooltip.cyber_implants.body_implant1": "Ингибитор Токсинов",
+  "tooltip.cyber_implants.body_implant2": "Импульсный Ускоритель",
+  "tooltip.cyber_implants.body_implant3": "???",
+  "tooltip.cyber_implants.body_implant4": "???",
+  "tooltip.cyber_implants.body_implant5": "???",
+  
+  "tooltip.cyber_implants.neural_implant0": "???",
+  "tooltip.cyber_implants.neural_implant1": "???",
+  "tooltip.cyber_implants.neural_implant2": "???",
+  
+  "tooltip.cyber_implants.combat_implant0": "???",
+  "tooltip.cyber_implants.combat_implant1": "???",
+  "tooltip.cyber_implants.combat_implant2": "???",
+  "tooltip.cyber_implants.combat_implant3": "???",
+  
+  "tooltip.cyber_implants.systemic_implant0": "???",
+  "tooltip.cyber_implants.systemic_implant1": "???",
+  "tooltip.cyber_implants.systemic_implant2": "???",
+  "tooltip.cyber_implants.systemic_implant3": "???",
 
   "component.cyber_implants.upgrade": "Улучшить",
-
 
   "component.cyber_implants.name": "Name: ",
   "component.cyber_implants.health": "Health: ",

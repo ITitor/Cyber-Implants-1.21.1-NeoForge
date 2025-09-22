@@ -4,12 +4,10 @@ import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ModData;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class SendCyberPacket implements CustomPacketPayload {
@@ -37,15 +35,19 @@ public class SendCyberPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
                 if (packet.id == 0) {
-                    serverPlayer.setData(ModData.IMPLANT0, packet.implant);
+                    serverPlayer.setData(ModData.EYE_IMPLANT0, packet.implant);
                 }if (packet.id == 1) {
-                    serverPlayer.setData(ModData.IMPLANT1, packet.implant);
+                    serverPlayer.setData(ModData.EYE_IMPLANT1, packet.implant);
                 }if (packet.id == 2) {
-                    serverPlayer.setData(ModData.IMPLANT2, packet.implant);
-                }if (packet.id == 3) {
-                    serverPlayer.setData(ModData.IMPLANT3, packet.implant);
+                    serverPlayer.setData(ModData.EYE_IMPLANT2, packet.implant);
+                }
+
+                if (packet.id == 3) {
+                    serverPlayer.setData(ModData.BODY_IMPLANT0, packet.implant);
                 }if (packet.id == 4) {
-                    serverPlayer.setData(ModData.IMPLANT4, packet.implant);
+                    serverPlayer.setData(ModData.BODY_IMPLANT1, packet.implant);
+                }if (packet.id == 5) {
+                    serverPlayer.setData(ModData.BODY_IMPLANT2, packet.implant);
                 }
             }
         });

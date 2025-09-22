@@ -52,13 +52,16 @@ public class KeyBindingEvent {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             Player player = Minecraft.getInstance().player;
-            if (GUI.isDown()){
+            if (GUI.isDown() && Minecraft.getInstance().screen instanceof CyberImplantsScreen){
+                Minecraft.getInstance().screen.onClose();
+            }else if (GUI.isDown()){
                 Minecraft.getInstance().setScreen(new CyberImplantsScreen());
             }
+
             if (ABILITY.isDown() && ClientData.implant[0] > 0 && ClientData.cooldown[0] <= 0 && ClientData.selectAbility == 0){
                 PacketDistributor.sendToServer(new SendAbilityPacket(0));
             }
-            else if (ABILITY.isDown() && ClientData.implant[4] > 0 && ClientData.cooldown[1] <= 0 && ClientData.selectAbility == 1){
+            else if (ABILITY.isDown() && ClientData.implant[5] > 0 && ClientData.cooldown[1] <= 0 && ClientData.selectAbility == 1){
                 float f1 = (float) Math.cos(Math.toRadians(player.getYRot() + 90));
                 float f2 = (float) Math.sin(Math.toRadians(player.getYRot() + 90));
                 if (player.onGround()) {
@@ -82,7 +85,7 @@ public class KeyBindingEvent {
                 PacketDistributor.sendToServer(new SendAbilityPacket(1));
                 ClientData.cooldown[1] = SendAbilityPacket.cd1;
             }
-            if (ABILITY1.isDown()){
+            if (ABILITY1.isDown() && (ClientData.implant[0] > 0 || ClientData.implant[5] > 0)){
                 Minecraft.getInstance().setScreen(new SelectAbilityScreen());
             }
         }

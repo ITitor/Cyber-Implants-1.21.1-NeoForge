@@ -19,6 +19,12 @@ public class BackButton extends Button {
         this(x, y, width, height, onPress, CommonComponents.EMPTY);
     }
 
+    private boolean flip;
+    public BackButton(int x, int y, int width, int height, OnPress onPress, boolean flip) {
+        this(x, y, width, height, onPress, CommonComponents.EMPTY);
+        this.flip = flip;
+    }
+
     public BackButton(int x, int y, int width, int height, OnPress onPress, Component message) {
         super(x, y, width, height, message, onPress, DEFAULT_NARRATION);
 //        this.sprites = sprites;
@@ -35,7 +41,11 @@ public class BackButton extends Button {
         RenderSystem.setShaderTexture(0, resourcelocation);
         RenderSystem.enableBlend();
 
-        guiGraphics.blit(resourcelocation, this.getX(), this.getY(), 416, 32, 18, 10, 640, 640);
+        if (!flip){
+            guiGraphics.blit(resourcelocation, this.getX(), this.getY(), 416, 32, 18, 10, 640, 640);
+        }else {
+            guiGraphics.blit(resourcelocation, this.getX(), this.getY(), 416, 48, 18, 10, 640, 640);
+        }
 
         RenderSystem.disableBlend();
     }
