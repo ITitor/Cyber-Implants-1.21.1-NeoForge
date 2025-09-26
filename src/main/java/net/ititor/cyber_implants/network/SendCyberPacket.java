@@ -48,6 +48,40 @@ public class SendCyberPacket implements CustomPacketPayload {
                     serverPlayer.setData(ModData.BODY_IMPLANT1, packet.implant);
                 }if (packet.id == 5) {
                     serverPlayer.setData(ModData.BODY_IMPLANT2, packet.implant);
+                }if (packet.id == 6) {
+                    serverPlayer.setData(ModData.BODY_IMPLANT3, packet.implant);
+                }if (packet.id == 7) {
+                    serverPlayer.setData(ModData.BODY_IMPLANT4, packet.implant);
+                }if (packet.id == 8) {
+                    serverPlayer.setData(ModData.BODY_IMPLANT5, packet.implant);
+                }
+
+                if (packet.id == 9) {
+                    serverPlayer.setData(ModData.NEURAL_IMPLANT0, packet.implant);
+                }if (packet.id == 10) {
+                    serverPlayer.setData(ModData.NEURAL_IMPLANT1, packet.implant);
+                }if (packet.id == 11) {
+                    serverPlayer.setData(ModData.NEURAL_IMPLANT2, packet.implant);
+                }
+
+                if (packet.id == 11) {
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT0, packet.implant);
+                }if (packet.id == 12) {
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT1, packet.implant);
+                }if (packet.id == 13) {
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT2, packet.implant);
+                }if (packet.id == 14) {
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT3, packet.implant);
+                }
+
+                if (packet.id == 15) {
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT0, packet.implant);
+                }if (packet.id == 16) {
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT1, packet.implant);
+                }if (packet.id == 17) {
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT2, packet.implant);
+                }if (packet.id == 18) {
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT3, packet.implant);
                 }
             }
         });

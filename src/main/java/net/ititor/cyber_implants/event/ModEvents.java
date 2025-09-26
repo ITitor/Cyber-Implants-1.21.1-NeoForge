@@ -6,12 +6,14 @@ import net.ititor.cyber_implants.network.SyncDataPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
@@ -101,6 +103,10 @@ public class ModEvents {
             player.setData(ModData.COOLDOWN2, player.getData(ModData.COOLDOWN2) - 1);
         }
 
+        if (player.getData(ModData.EYE_IMPLANT2) > 0){
+            player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 15, 0, false, false, false));
+        }
+
         // Ингибитор Токсинов
         if (player.getData(ModData.BODY_IMPLANT1) > 0){
             if (player.hasEffect(MobEffects.HUNGER)){player.removeEffect(MobEffects.HUNGER);}
@@ -109,6 +115,7 @@ public class ModEvents {
             if (player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)){player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);}
             if (player.hasEffect(MobEffects.WEAKNESS)){player.removeEffect(MobEffects.WEAKNESS);}
         }
+
     }
 
     @SubscribeEvent
@@ -127,6 +134,17 @@ public class ModEvents {
                         SoundSource.MASTER, 0.75F, 1.15F);
                 event.setCanceled(true);
             }
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onFall(LivingFallEvent event) {
+        LivingEntity entity = event.getEntity();
+
+        //Амортизационные пластины
+        if (entity.getData(ModData.BODY_IMPLANT3) > 0) {
+            event.setDistance(event.getDistance()-5);
         }
 
     }

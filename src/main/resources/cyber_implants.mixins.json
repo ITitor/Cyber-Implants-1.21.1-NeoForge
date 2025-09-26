@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.ititor.cyber_implants.mixin",
+  "refmap": "cyber_implants.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "net.ititor.cyber_implants.mixin.MixinPlugin",
+  "mixins": [
+    "ChorusFruitItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

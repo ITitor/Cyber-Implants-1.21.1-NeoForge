@@ -21,11 +21,31 @@ public class ResetCommand {
 
         player.setData(ModData.EYE_IMPLANT0, 0);
         player.setData(ModData.EYE_IMPLANT1, 0);
+        player.setData(ModData.EYE_IMPLANT2, 0);
+
         player.setData(ModData.BODY_IMPLANT0, 0);
         player.setData(ModData.BODY_IMPLANT1, 0);
         player.setData(ModData.BODY_IMPLANT2, 0);
+        player.setData(ModData.BODY_IMPLANT3, 0);
+        player.setData(ModData.BODY_IMPLANT4, 0);
+        player.setData(ModData.BODY_IMPLANT5, 0);
 
-        player.setData(ModData.CYBER_POINTS, 0);
+        player.setData(ModData.NEURAL_IMPLANT0, 0);
+        player.setData(ModData.NEURAL_IMPLANT1, 0);
+        player.setData(ModData.NEURAL_IMPLANT2, 0);
+
+        player.setData(ModData.COMBAT_IMPLANT0, 0);
+        player.setData(ModData.COMBAT_IMPLANT1, 0);
+        player.setData(ModData.COMBAT_IMPLANT2, 0);
+        player.setData(ModData.COMBAT_IMPLANT3, 0);
+
+        player.setData(ModData.SYSTEMIC_IMPLANT0, 0);
+        player.setData(ModData.SYSTEMIC_IMPLANT1, 0);
+        player.setData(ModData.SYSTEMIC_IMPLANT2, 0);
+        player.setData(ModData.SYSTEMIC_IMPLANT3, 0);
+
+
+//        player.setData(ModData.CYBER_POINTS, 0);
 
 
 //        context.getSource().sendSuccess(() -> {
