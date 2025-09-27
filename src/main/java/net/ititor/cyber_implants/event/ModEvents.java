@@ -2,17 +2,22 @@ package net.ititor.cyber_implants.event;
 
 import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ModData;
+import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.network.SyncDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -116,6 +121,9 @@ public class ModEvents {
             if (player.hasEffect(MobEffects.WEAKNESS)){player.removeEffect(MobEffects.WEAKNESS);}
         }
 
+        if (player.getData(ModData.BODY_IMPLANT5) > 0){
+            player.addEffect(new MobEffectInstance(ModEffects.CYBER_FORCE, 15, 0, false, false, false));
+        }
     }
 
     @SubscribeEvent
@@ -146,7 +154,6 @@ public class ModEvents {
         if (entity.getData(ModData.BODY_IMPLANT3) > 0) {
             event.setDistance(event.getDistance()-5);
         }
-
     }
 
     @SubscribeEvent

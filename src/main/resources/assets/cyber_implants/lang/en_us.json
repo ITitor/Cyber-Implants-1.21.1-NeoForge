@@ -1,5 +1,7 @@
 {
   "effect.cyber_implants.cyberpsychosis": "Cyberpsychosis",
+  "effect.cyber_implants.cyber_force": "",
+  "effect.cyber_implants.cyber_rage": "Cyberrage",
 
   "tooltip.cyber_implants.button0": "Зрительные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
@@ -15,11 +17,11 @@
   "tooltip.cyber_implants.body_implant1": "Ингибитор Токсинов",
   "tooltip.cyber_implants.body_implant2": "Импульсный Ускоритель",
   "tooltip.cyber_implants.body_implant3": "Амортизационные пластины",
-  "tooltip.cyber_implants.body_implant4": "???",
-  "tooltip.cyber_implants.body_implant5": "???",
+  "tooltip.cyber_implants.body_implant4": "Эндер-Стабилизатор",
+  "tooltip.cyber_implants.body_implant5": "???(скорость)",
   
-  "tooltip.cyber_implants.neural_implant0": "???",
-  "tooltip.cyber_implants.neural_implant1": "???",
+  "tooltip.cyber_implants.neural_implant0": "Клеточный Реконструктор",
+  "tooltip.cyber_implants.neural_implant1": "Нейростимулятор",
   "tooltip.cyber_implants.neural_implant2": "???",
   
   "tooltip.cyber_implants.combat_implant0": "???",

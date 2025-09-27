@@ -1,5 +1,7 @@
 {
   "effect.cyber_implants.cyberpsychosis": "Киберпсихоз",
+  "effect.cyber_implants.cyber_force": "",
+  "effect.cyber_implants.cyber_rage": "Киберярость",
 
   "tooltip.cyber_implants.button0": "Окулярные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",

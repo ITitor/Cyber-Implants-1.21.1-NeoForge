@@ -58,8 +58,8 @@ public class KeyBindingEvent {
                 Minecraft.getInstance().setScreen(new CyberImplantsScreen());
             }
 
-            if (ABILITY.isDown() && ClientData.implant[0] > 0 && ClientData.cooldown[0] <= 0 && ClientData.selectAbility == 0){
-                PacketDistributor.sendToServer(new SendAbilityPacket(0));
+            if (ABILITY.isDown() && ClientData.selectAbility != 1){
+                PacketDistributor.sendToServer(new SendAbilityPacket(ClientData.selectAbility));
             }
             else if (ABILITY.isDown() && ClientData.implant[5] > 0 && ClientData.cooldown[1] <= 0 && ClientData.selectAbility == 1){
                 float f1 = (float) Math.cos(Math.toRadians(player.getYRot() + 90));

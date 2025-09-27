@@ -11,6 +11,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -35,6 +37,7 @@ public class SendAbilityPacket implements CustomPacketPayload {
 
     public static final int cd0 = 100;
     public static final int cd1 = 60;
+    public static final int cd2 = 100;
     public static void handle(SendAbilityPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
@@ -141,6 +144,7 @@ public class SendAbilityPacket implements CustomPacketPayload {
 
                     player.setData(ModData.COOLDOWN0, packet.cd0);
                 }
+
                 if (player.getData(ModData.BODY_IMPLANT2) > 0 && player.getData(ModData.COOLDOWN1) <= 0 && player.getData(ModData.SELECT_ABILITY) == 1) {
 
                     //Dash
@@ -153,6 +157,23 @@ public class SendAbilityPacket implements CustomPacketPayload {
 //                    }
 
                     player.setData(ModData.COOLDOWN1, packet.cd1);
+                }
+
+                if (player.getData(ModData.NEURAL_IMPLANT0) > 0 && player.getData(ModData.COOLDOWN2) <= 0 && player.getData(ModData.SELECT_ABILITY) == 2 && player.getHealth() != player.getMaxHealth() && player.getFoodData().getFoodLevel() > 1) {
+
+                    for (int i = 0; i <= 20; i++) {
+                        if (player.getHealth() == player.getMaxHealth() || player.getFoodData().getFoodLevel() <= 1){
+                            break;
+                        }
+                        player.heal(0.55f);
+                        player.getFoodData().eat(-1, 0);
+                    }
+
+//                    player.playNotifySound(SoundEvents., SoundSource.MASTER, 0.65f, -1.5f);
+                    player.hurt(player.damageSources().generic(), 0.05f);
+                    player.heal(0.05f);
+
+                    player.setData(ModData.COOLDOWN2, packet.cd2);
                 }
 
             }

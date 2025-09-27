@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "net.ititor.cyber_implants.mixin.MixinPlugin",
   "mixins": [
-    "ChorusFruitItemMixin"
+    "ChorusFruitItemMixin",
+    "ThrownEnderpearlMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

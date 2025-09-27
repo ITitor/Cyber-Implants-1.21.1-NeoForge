@@ -260,7 +260,11 @@ public class SelectAbilityScreen extends Screen {
     public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
         if (this.selectedItem != -1) {
 //            radialMenu.setCurrentSlot(selectedItem);
+
+            /**Select**/
             PacketDistributor.sendToServer(new SendSelectAbilityPacket(selectedItem));
+            /**Select**/
+
             minecraft.player.closeContainer();
         }
         return true;
