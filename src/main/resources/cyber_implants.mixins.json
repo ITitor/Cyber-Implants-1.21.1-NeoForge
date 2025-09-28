@@ -7,7 +7,7 @@
   "mixins": [
     "ChorusFruitItemMixin",
     "ThrownEnderpearlMixin",
-    "PlayerMixin"
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

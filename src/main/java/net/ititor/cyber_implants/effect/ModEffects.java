@@ -4,6 +4,7 @@ import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.effect.effect.CyberRageEffect;
 import net.ititor.cyber_implants.effect.effect.CyberpsychosisEffect;
 import net.ititor.cyber_implants.effect.effect.ModEffect;
+import net.ititor.cyber_implants.effect.effect.NeuroShockEffect;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +20,7 @@ public class ModEffects {
             DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, CyberImplants.MOD_ID);
 
     public static final Holder<MobEffect> CYBERPSYCHOSIS = MOB_EFFECTS.register("cyberpsychosis",
-            () -> new CyberpsychosisEffect(MobEffectCategory.NEUTRAL, 3240562));
+            () -> new CyberpsychosisEffect(MobEffectCategory.HARMFUL, 3240562));
 
     public static final Holder<MobEffect> CYBER_FORCE = MOB_EFFECTS.register("cyber_force",
             () -> new ModEffect(MobEffectCategory.BENEFICIAL, 3240562)
@@ -33,10 +34,15 @@ public class ModEffects {
         .addAttributeModifier(Attributes.ATTACK_DAMAGE, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 5, AttributeModifier.Operation.ADD_VALUE)
         .addAttributeModifier(Attributes.ARMOR, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 5, AttributeModifier.Operation.ADD_VALUE)
         .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.555, AttributeModifier.Operation.ADD_VALUE)
-        .addAttributeModifier(Attributes.ATTACK_SPEED, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.15000000298023224, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
-        .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.27500000298023224, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+        .addAttributeModifier(Attributes.ATTACK_SPEED, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.17500000298023224, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+        .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.32500000298023224, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
     );
 
+    public static final Holder<MobEffect> NEUROSHOCK = MOB_EFFECTS.register("neuroshock",
+            () -> new NeuroShockEffect(MobEffectCategory.HARMFUL, 3240562)
+        .addAttributeModifier(Attributes.ATTACK_DAMAGE, ResourceLocation.withDefaultNamespace("effect.neuroshock"), -99999, AttributeModifier.Operation.ADD_VALUE)
+        .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.15, AttributeModifier.Operation.ADD_VALUE)
+    );
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

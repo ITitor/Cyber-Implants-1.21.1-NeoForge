@@ -3,6 +3,7 @@ package net.ititor.cyber_implants.gui;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.ititor.cyber_implants.data.ClientData;
 import net.ititor.cyber_implants.network.SendSelectAbilityPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -48,7 +49,26 @@ public class SelectAbilityScreen extends Screen {
     private int selectedItem;
     public ItemRenderer itemRenderer;
 
-    private int numberOfSlices = 4;
+    private int numberOfSlices = 5;
+    private int getNumberOfSlices(){
+        int i = 0;
+        if (ClientData.implant[0] > 0){
+            i++;
+        }
+        if (ClientData.implant[5] > 0){
+            i++;
+        }
+        if (ClientData.implant[9] > 0){
+            i++;
+        }
+        if (ClientData.implant[10] > 0){
+            i++;
+        }
+        if (ClientData.implant[11] > 0){
+            i++;
+        }
+        return i;
+    }
 
 
     public SelectAbilityScreen() {
@@ -206,8 +226,8 @@ public class SelectAbilityScreen extends Screen {
         }
     }
 
-    private String text(int id){
-        return "Ability"+id;
+    private Component text(int id){
+        return Component.translatable("tooltip.cyber_implants.ability"+id);
     }
 
 //    public void drawSecondaryIcons(GuiGraphics ms, int positionXOfPrimaryIcon, int positionYOfPrimaryIcon, List<T> secondarySlotIcons) {

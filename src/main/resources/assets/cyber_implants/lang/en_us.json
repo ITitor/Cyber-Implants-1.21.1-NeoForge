@@ -2,6 +2,7 @@
   "effect.cyber_implants.cyberpsychosis": "Cyberpsychosis",
   "effect.cyber_implants.cyber_force": "",
   "effect.cyber_implants.cyber_rage": "Cyberrage",
+  "effect.cyber_implants.neuroshock": "Neuroshock",
 
   "tooltip.cyber_implants.button0": "Зрительные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
@@ -24,15 +25,21 @@
   "tooltip.cyber_implants.neural_implant1": "Нейростимулятор",
   "tooltip.cyber_implants.neural_implant2": "???",
   
-  "tooltip.cyber_implants.combat_implant0": "???",
+  "tooltip.cyber_implants.combat_implant0": "???(шипы)",
   "tooltip.cyber_implants.combat_implant1": "???",
   "tooltip.cyber_implants.combat_implant2": "???",
-  "tooltip.cyber_implants.combat_implant3": "???",
+  "tooltip.cyber_implants.combat_implant3": "Гидравлические Мышцы",
   
-  "tooltip.cyber_implants.systemic_implant0": "???",
+  "tooltip.cyber_implants.systemic_implant0": "Чёрный Ящик",
   "tooltip.cyber_implants.systemic_implant1": "???",
   "tooltip.cyber_implants.systemic_implant2": "???",
   "tooltip.cyber_implants.systemic_implant3": "???",
+
+  "tooltip.cyber_implants.ability0": "Спектральный Анализ",
+  "tooltip.cyber_implants.ability1": "Импульсный Ускоритель",
+  "tooltip.cyber_implants.ability2": "Клеточный Реконструктор",
+  "tooltip.cyber_implants.ability3": "Нейростимулятор",
+  "tooltip.cyber_implants.ability4": "???",
 
   "component.cyber_implants.upgrade": "Улучшить",
 
@@ -42,5 +49,5 @@
   "key.category.cyber_implants": "Cyber Implants",
   "key.cyber_implants.gui": "GUI",
   "key.cyber_implants.ability": "Ability",
-  "key.cyber_implants.ability1": "Ability 1"
+  "key.cyber_implants.ability1": "Select Ability"
 }

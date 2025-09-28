@@ -64,23 +64,23 @@ public class SendCyberPacket implements CustomPacketPayload {
                     serverPlayer.setData(ModData.NEURAL_IMPLANT2, packet.implant);
                 }
 
-                if (packet.id == 11) {
+                if (packet.id == 12) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT0, packet.implant);
-                }if (packet.id == 12) {
-                    serverPlayer.setData(ModData.COMBAT_IMPLANT1, packet.implant);
                 }if (packet.id == 13) {
-                    serverPlayer.setData(ModData.COMBAT_IMPLANT2, packet.implant);
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT1, packet.implant);
                 }if (packet.id == 14) {
+                    serverPlayer.setData(ModData.COMBAT_IMPLANT2, packet.implant);
+                }if (packet.id == 15) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT3, packet.implant);
                 }
 
-                if (packet.id == 15) {
+                if (packet.id == 16) {
                     serverPlayer.setData(ModData.SYSTEMIC_IMPLANT0, packet.implant);
-                }if (packet.id == 16) {
-                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT1, packet.implant);
                 }if (packet.id == 17) {
-                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT2, packet.implant);
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT1, packet.implant);
                 }if (packet.id == 18) {
+                    serverPlayer.setData(ModData.SYSTEMIC_IMPLANT2, packet.implant);
+                }if (packet.id == 19) {
                     serverPlayer.setData(ModData.SYSTEMIC_IMPLANT3, packet.implant);
                 }
             }

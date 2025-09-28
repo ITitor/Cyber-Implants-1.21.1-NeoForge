@@ -16,15 +16,15 @@ public class CyberRageEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
 
-        if (livingEntity.tickCount % 50 == 0){
-            livingEntity.heal(1);
+        if (livingEntity.tickCount % 40 == 0){
+            livingEntity.heal(1.2f);
         }
 
         if (livingEntity.getEffect(ModEffects.CYBER_RAGE).getDuration() <= 1) {
-            livingEntity.hurt(livingEntity.damageSources().genericKill(), 2);
+            livingEntity.hurt(livingEntity.damageSources().genericKill(), 3);
             livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 140, 0, false, false, false));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 140, 0, false, false, false));
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 140, 0, false, false, false));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0, false, false, false));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 0, false, false, false));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 0, false, false, false));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 0, false, false, false));

@@ -18,8 +18,10 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -81,6 +83,9 @@ public class ModEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN0), 50));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN1), 51));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN2), 52));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN3), 53));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN4), 54));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN5), 55));
 
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_POINTS), 98));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_LEVEL), 99));
@@ -94,6 +99,12 @@ public class ModEvents {
             player.setData(ModData.COOLDOWN1, 0);
         }if (!player.hasData(ModData.COOLDOWN2)) {
             player.setData(ModData.COOLDOWN2, 0);
+        }if (!player.hasData(ModData.COOLDOWN3)) {
+            player.setData(ModData.COOLDOWN3, 0);
+        }if (!player.hasData(ModData.COOLDOWN4)) {
+            player.setData(ModData.COOLDOWN4, 0);
+        }if (!player.hasData(ModData.COOLDOWN5)) {
+            player.setData(ModData.COOLDOWN5, 0);
         }
 
         // Спектральный Анализ
@@ -104,8 +115,19 @@ public class ModEvents {
         if (player.getData(ModData.COOLDOWN1) > 0 && player.hasData(ModData.COOLDOWN1)) {
             player.setData(ModData.COOLDOWN1, player.getData(ModData.COOLDOWN1) - 1);
         }
+        //Клеточный Реконструктор
         if (player.getData(ModData.COOLDOWN2) > 0 && player.hasData(ModData.COOLDOWN2)) {
             player.setData(ModData.COOLDOWN2, player.getData(ModData.COOLDOWN2) - 1);
+        }
+        //Нейростимулятор
+        if (player.getData(ModData.COOLDOWN3) > 0 && player.hasData(ModData.COOLDOWN3)) {
+            player.setData(ModData.COOLDOWN3, player.getData(ModData.COOLDOWN3) - 1);
+        }
+        if (player.getData(ModData.COOLDOWN4) > 0 && player.hasData(ModData.COOLDOWN4)) {
+            player.setData(ModData.COOLDOWN4, player.getData(ModData.COOLDOWN4) - 1);
+        }
+        if (player.getData(ModData.COOLDOWN5) > 0 && player.hasData(ModData.COOLDOWN5)) {
+            player.setData(ModData.COOLDOWN5, player.getData(ModData.COOLDOWN5) - 1);
         }
 
         if (player.getData(ModData.EYE_IMPLANT2) > 0){
@@ -143,8 +165,31 @@ public class ModEvents {
                 event.setCanceled(true);
             }
         }
+
+        if (entity.getData(ModData.COMBAT_IMPLANT0) > 0){
+            if (event.getSource().getDirectEntity() != null){
+                event.getSource().getDirectEntity().hurt(event.getSource(), event.getOriginalAmount() * 0.2f);
+            }
+        }
+
+        //Гидравлические Мышцы
+        if (event.getSource().getDirectEntity() != null) {
+            if (event.getSource().getDirectEntity().getData(ModData.COMBAT_IMPLANT3) > 0) {
+                event.setAmount(event.getOriginalAmount() + 1);
+            }
+        }
+
+
     }
 
+    @SubscribeEvent
+    public static void onDeath(LivingDeathEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.getData(ModData.SYSTEMIC_IMPLANT0) > 0){
+            event.setCanceled(true);
+            entity.setHealth(2);
+        }
+    }
 
     @SubscribeEvent
     public static void onFall(LivingFallEvent event) {
@@ -169,17 +214,75 @@ public class ModEvents {
             event.getEntity().setData(ModData.EYE_IMPLANT0, event.getOriginal().getData(ModData.EYE_IMPLANT0));
         }if (event.isWasDeath() && event.getOriginal().hasData(ModData.EYE_IMPLANT1)) {
             event.getEntity().setData(ModData.EYE_IMPLANT1, event.getOriginal().getData(ModData.EYE_IMPLANT1));
-        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT0)) {
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.EYE_IMPLANT2)) {
+            event.getEntity().setData(ModData.EYE_IMPLANT2, event.getOriginal().getData(ModData.EYE_IMPLANT2));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT0)) {
             event.getEntity().setData(ModData.BODY_IMPLANT0, event.getOriginal().getData(ModData.BODY_IMPLANT0));
         }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT1)) {
             event.getEntity().setData(ModData.BODY_IMPLANT1, event.getOriginal().getData(ModData.BODY_IMPLANT1));
         }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT2)) {
             event.getEntity().setData(ModData.BODY_IMPLANT2, event.getOriginal().getData(ModData.BODY_IMPLANT2));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT2)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT3, event.getOriginal().getData(ModData.BODY_IMPLANT3));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT3)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT4, event.getOriginal().getData(ModData.BODY_IMPLANT4));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.BODY_IMPLANT4)) {
+            event.getEntity().setData(ModData.BODY_IMPLANT5, event.getOriginal().getData(ModData.BODY_IMPLANT5));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.NEURAL_IMPLANT0)) {
+            event.getEntity().setData(ModData.NEURAL_IMPLANT0, event.getOriginal().getData(ModData.NEURAL_IMPLANT0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.NEURAL_IMPLANT1)) {
+            event.getEntity().setData(ModData.NEURAL_IMPLANT1, event.getOriginal().getData(ModData.NEURAL_IMPLANT1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.NEURAL_IMPLANT2)) {
+            event.getEntity().setData(ModData.NEURAL_IMPLANT2, event.getOriginal().getData(ModData.NEURAL_IMPLANT2));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.COMBAT_IMPLANT0)) {
+            event.getEntity().setData(ModData.COMBAT_IMPLANT0, event.getOriginal().getData(ModData.COMBAT_IMPLANT0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COMBAT_IMPLANT1)) {
+            event.getEntity().setData(ModData.COMBAT_IMPLANT1, event.getOriginal().getData(ModData.COMBAT_IMPLANT1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COMBAT_IMPLANT2)) {
+            event.getEntity().setData(ModData.COMBAT_IMPLANT2, event.getOriginal().getData(ModData.COMBAT_IMPLANT2));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COMBAT_IMPLANT3)) {
+            event.getEntity().setData(ModData.COMBAT_IMPLANT3, event.getOriginal().getData(ModData.COMBAT_IMPLANT3));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.SYSTEMIC_IMPLANT0)) {
+            event.getEntity().setData(ModData.SYSTEMIC_IMPLANT0, event.getOriginal().getData(ModData.SYSTEMIC_IMPLANT0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.SYSTEMIC_IMPLANT1)) {
+            event.getEntity().setData(ModData.SYSTEMIC_IMPLANT1, event.getOriginal().getData(ModData.SYSTEMIC_IMPLANT1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.SYSTEMIC_IMPLANT2)) {
+            event.getEntity().setData(ModData.SYSTEMIC_IMPLANT2, event.getOriginal().getData(ModData.SYSTEMIC_IMPLANT2));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.SYSTEMIC_IMPLANT3)) {
+            event.getEntity().setData(ModData.SYSTEMIC_IMPLANT3, event.getOriginal().getData(ModData.SYSTEMIC_IMPLANT3));
         }
 
 
         if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN0)) {
             event.getEntity().setData(ModData.COOLDOWN0, event.getOriginal().getData(ModData.COOLDOWN0));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN1)) {
+            event.getEntity().setData(ModData.COOLDOWN1, event.getOriginal().getData(ModData.COOLDOWN1));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN2)) {
+            event.getEntity().setData(ModData.COOLDOWN2, event.getOriginal().getData(ModData.COOLDOWN2));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN3)) {
+            event.getEntity().setData(ModData.COOLDOWN3, event.getOriginal().getData(ModData.COOLDOWN3));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN4)) {
+            event.getEntity().setData(ModData.COOLDOWN4, event.getOriginal().getData(ModData.COOLDOWN4));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN5)) {
+            event.getEntity().setData(ModData.COOLDOWN5, event.getOriginal().getData(ModData.COOLDOWN5));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.SELECT_ABILITY)) {
+            event.getEntity().setData(ModData.SELECT_ABILITY, event.getOriginal().getData(ModData.SELECT_ABILITY));
+        }
+
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.CYBER_POINTS)) {
+            event.getEntity().setData(ModData.CYBER_POINTS, event.getOriginal().getData(ModData.CYBER_POINTS));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.CYBER_LEVEL)) {
+            event.getEntity().setData(ModData.CYBER_LEVEL, event.getOriginal().getData(ModData.CYBER_LEVEL));
         }
     }
 

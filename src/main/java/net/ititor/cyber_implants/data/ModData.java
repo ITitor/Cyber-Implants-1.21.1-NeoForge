@@ -69,7 +69,14 @@ public class ModData {
             "cooldown1", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );public static final Supplier<AttachmentType<Integer>> COOLDOWN2 = ATTACHMENT_TYPES.register(
             "cooldown2", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> COOLDOWN3 = ATTACHMENT_TYPES.register(
+            "cooldown3", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> COOLDOWN4 = ATTACHMENT_TYPES.register(
+            "cooldown4", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );public static final Supplier<AttachmentType<Integer>> COOLDOWN5 = ATTACHMENT_TYPES.register(
+            "cooldown5", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
+
 
     public static final Supplier<AttachmentType<Integer>> SELECT_ABILITY = ATTACHMENT_TYPES.register(
             "select_ability", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
