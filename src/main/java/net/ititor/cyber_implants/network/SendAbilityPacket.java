@@ -8,14 +8,18 @@ import net.ititor.cyber_implants.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -219,6 +223,15 @@ public class SendAbilityPacket implements CustomPacketPayload {
                             player.setData(ModData.COOLDOWN4, packet.cd4);
                         }
 
+                    }
+
+                    //EnderChest
+                    if (player.getData(ModData.SYSTEMIC_IMPLANT1) > 0 && player.getData(ModData.SELECT_ABILITY) == 5) {
+
+                        PlayerEnderChestContainer playerenderchestcontainer = player.getEnderChestInventory();
+                        player.openMenu(new SimpleMenuProvider((p_53124_, p_53125_, p_53126_) -> {
+                            return ChestMenu.threeRows(p_53124_, p_53125_, playerenderchestcontainer);
+                        }, Component.translatable("container.enderchest")));
                     }
 
                 }

@@ -146,6 +146,12 @@ public class ModEvents {
         if (player.getData(ModData.BODY_IMPLANT5) > 0){
             player.addEffect(new MobEffectInstance(ModEffects.CYBER_FORCE, 15, 0, false, false, false));
         }
+
+        if (player.getData(ModData.SYSTEMIC_IMPLANT2) > 0){
+            if (!player.isOnFire()) {
+                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 150, 0, false, false, false));
+            }
+        }
     }
 
     @SubscribeEvent

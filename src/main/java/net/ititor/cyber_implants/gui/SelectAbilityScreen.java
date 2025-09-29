@@ -49,7 +49,7 @@ public class SelectAbilityScreen extends Screen {
     private int selectedItem;
     public ItemRenderer itemRenderer;
 
-    private int numberOfSlices = 5;
+    private int numberOfSlices = 8;
     private int getNumberOfSlices(){
         int i = 0;
         if (ClientData.implant[0] > 0){
@@ -267,7 +267,8 @@ public class SelectAbilityScreen extends Screen {
     @Override
     public boolean keyPressed(int key, int scanCode, int modifiers) {
         int adjustedKey = key - 48;
-        if (adjustedKey >= 0 && adjustedKey < 20) {
+        if (key == 1 || key == 0){
+//        if (adjustedKey >= 0 && adjustedKey < 20) {
             selectedItem = adjustedKey == 0 ? 20 : adjustedKey;
             selectedItem = selectedItem - 1; // Offset by 1 because 0 based indexing but users see 1 indexed
             mouseClicked(0, 0, 0);

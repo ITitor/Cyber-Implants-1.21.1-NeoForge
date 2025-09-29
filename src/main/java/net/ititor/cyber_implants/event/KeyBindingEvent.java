@@ -8,7 +8,6 @@ import net.ititor.cyber_implants.gui.SelectAbilityScreen;
 import net.ititor.cyber_implants.network.SendAbilityPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -53,7 +52,7 @@ public class KeyBindingEvent {
         public static void onKeyInput(InputEvent.Key event) {
             Player player = Minecraft.getInstance().player;
             if (GUI.isDown() && Minecraft.getInstance().screen instanceof CyberImplantsScreen){
-                Minecraft.getInstance().screen.onClose();
+                player.closeContainer();
             }else if (GUI.isDown()){
                 Minecraft.getInstance().setScreen(new CyberImplantsScreen());
             }
@@ -85,8 +84,15 @@ public class KeyBindingEvent {
                 PacketDistributor.sendToServer(new SendAbilityPacket(1));
                 ClientData.cooldown[1] = SendAbilityPacket.cd1;
             }
-            if (ABILITY1.isDown() && (ClientData.implant[0] > 0 || ClientData.implant[5] > 0)){
-                Minecraft.getInstance().setScreen(new SelectAbilityScreen());
+            if (ABILITY1.isDown() && (ClientData.implant[0] > 0 || ClientData.implant[5] > 0 || ClientData.implant[9] > 0 || ClientData.implant[10] > 0 || ClientData.implant[11] > 0 || ClientData.implant[17] > 0)){
+                try {
+                    if (Minecraft.getInstance().screen == null){
+                        Minecraft.getInstance().setScreen(new SelectAbilityScreen());
+                    }else if (Minecraft.getInstance().screen instanceof SelectAbilityScreen){
+                        player.closeContainer();
+                    }
+                } catch (RuntimeException ignored){}
+
             }
         }
     }
