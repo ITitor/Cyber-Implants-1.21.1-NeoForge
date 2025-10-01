@@ -3,6 +3,7 @@
   "effect.cyber_implants.cyber_force": "",
   "effect.cyber_implants.cyber_rage": "Cyberrage",
   "effect.cyber_implants.neuroshock": "Neuroshock",
+  "effect.cyber_implants.invulnerability": "Invulnerability",
 
   "tooltip.cyber_implants.button0": "Зрительные Импланты",
   "tooltip.cyber_implants.button1": "Опорно-Двигательные Импланты",
@@ -33,13 +34,16 @@
   "tooltip.cyber_implants.systemic_implant0": "Чёрный Ящик",
   "tooltip.cyber_implants.systemic_implant1": "???(эндер-сундук)",
   "tooltip.cyber_implants.systemic_implant2": "???(огнестойкость)",
-  "tooltip.cyber_implants.systemic_implant3": "???",
+  "tooltip.cyber_implants.systemic_implant3": "Фотосинтезирующая Кожа",
 
   "tooltip.cyber_implants.ability0": "Спектральный Анализ",
   "tooltip.cyber_implants.ability1": "Импульсный Ускоритель",
   "tooltip.cyber_implants.ability2": "Клеточный Реконструктор",
   "tooltip.cyber_implants.ability3": "Нейростимулятор",
-  "tooltip.cyber_implants.ability4": "???",
+  "tooltip.cyber_implants.ability4": "???(сбой)",
+  "tooltip.cyber_implants.ability5": "???",
+  "tooltip.cyber_implants.ability6": "???(перегрузка)",
+  "tooltip.cyber_implants.ability7": "???(эндер сундук)",
 
   "component.cyber_implants.upgrade": "Улучшить",
 

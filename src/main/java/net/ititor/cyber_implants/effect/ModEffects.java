@@ -44,6 +44,9 @@ public class ModEffects {
         .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.withDefaultNamespace("effect.cyber_rage"), 0.15, AttributeModifier.Operation.ADD_VALUE)
     );
 
+    public static final Holder<MobEffect> INVULNERABILITY = MOB_EFFECTS.register("invulnerability",
+            () -> new ModEffect(MobEffectCategory.BENEFICIAL, 16777215));
+
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }

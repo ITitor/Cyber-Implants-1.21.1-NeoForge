@@ -2,6 +2,8 @@ package net.ititor.cyber_implants.particle;
 
 import com.mojang.serialization.MapCodec;
 import net.ititor.cyber_implants.CyberImplants;
+import net.ititor.cyber_implants.particle.particle.BlastwaveParticle;
+import net.ititor.cyber_implants.particle.particle.BlastwaveParticleOptions;
 import net.ititor.cyber_implants.particle.particle.OreParticle;
 import net.ititor.cyber_implants.particle.particle.OreParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -32,11 +34,20 @@ public class ModParticles {
         }
     });
 
+    public static final Supplier<ParticleType<BlastwaveParticleOptions>> BLASTWAVE_PARTICLE = PARTICLE_TYPES.register("blastwave", () -> new ParticleType<>(true) {
+        public MapCodec<BlastwaveParticleOptions> codec() {
+            return BlastwaveParticleOptions.MAP_CODEC;
+        }
+        public StreamCodec<? super RegistryFriendlyByteBuf, BlastwaveParticleOptions> streamCodec() {
+            return BlastwaveParticleOptions.STREAM_CODEC;
+        }
+    });
+
     @SubscribeEvent
     public static void onParticleRegistry(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ORE_PARTICLE.get(), OreParticle.Provider::new);
+        event.registerSpriteSet(BLASTWAVE_PARTICLE.get(), BlastwaveParticle.Provider::new);
     }
-
 
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);

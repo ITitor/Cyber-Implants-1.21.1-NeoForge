@@ -5,6 +5,7 @@ import net.ititor.cyber_implants.data.ModData;
 import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.network.SyncDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -86,6 +87,9 @@ public class ModEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN3), 53));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN4), 54));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN5), 55));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN6), 56));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN_FIRE), 57));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.COOLDOWN_UNDYING), 58));
 
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_POINTS), 98));
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.CYBER_LEVEL), 99));
@@ -105,6 +109,8 @@ public class ModEvents {
             player.setData(ModData.COOLDOWN4, 0);
         }if (!player.hasData(ModData.COOLDOWN5)) {
             player.setData(ModData.COOLDOWN5, 0);
+        }if (!player.hasData(ModData.COOLDOWN6)) {
+            player.setData(ModData.COOLDOWN6, 0);
         }
 
         // Спектральный Анализ
@@ -129,6 +135,9 @@ public class ModEvents {
         if (player.getData(ModData.COOLDOWN5) > 0 && player.hasData(ModData.COOLDOWN5)) {
             player.setData(ModData.COOLDOWN5, player.getData(ModData.COOLDOWN5) - 1);
         }
+        if (player.getData(ModData.COOLDOWN6) > 0 && player.hasData(ModData.COOLDOWN6)) {
+            player.setData(ModData.COOLDOWN6, player.getData(ModData.COOLDOWN6) - 1);
+        }
 
         if (player.getData(ModData.EYE_IMPLANT2) > 0){
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 15, 0, false, false, false));
@@ -152,6 +161,22 @@ public class ModEvents {
                 player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 150, 0, false, false, false));
             }
         }
+
+        if (player.getData(ModData.SYSTEMIC_IMPLANT3) > 0){
+            if (getDayTime(player.level()) >= 0 && getDayTime(player.level()) < 13000) {
+                if (player.tickCount % 320 == 0){
+                    player.heal(1);
+                    if (player.getFoodData().getFoodLevel() < 20) {
+                        player.getFoodData().eat(1, 0);
+                    } if (player.getFoodData().getSaturationLevel() < 20) {
+                        player.getFoodData().eat(0, 1);
+                    }
+                }
+            }
+        }
+    }
+    private static int getDayTime(Level level) {
+        return (int)(level.getDayTime() % 24000L);
     }
 
     @SubscribeEvent
@@ -186,6 +211,9 @@ public class ModEvents {
         }
 
 
+        if (entity.hasEffect(ModEffects.INVULNERABILITY)) {
+            event.setCanceled(true);
+        }
     }
 
     @SubscribeEvent
@@ -193,7 +221,8 @@ public class ModEvents {
         LivingEntity entity = event.getEntity();
         if (entity.getData(ModData.SYSTEMIC_IMPLANT0) > 0){
             event.setCanceled(true);
-            entity.setHealth(2);
+            entity.setHealth(5);
+            entity.addEffect(new MobEffectInstance(ModEffects.INVULNERABILITY, 100, 0, false, false, true));
         }
     }
 
@@ -279,6 +308,13 @@ public class ModEvents {
             event.getEntity().setData(ModData.COOLDOWN4, event.getOriginal().getData(ModData.COOLDOWN4));
         }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN5)) {
             event.getEntity().setData(ModData.COOLDOWN5, event.getOriginal().getData(ModData.COOLDOWN5));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN6)) {
+            event.getEntity().setData(ModData.COOLDOWN6, event.getOriginal().getData(ModData.COOLDOWN6));
+        }
+        if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN_FIRE)) {
+            event.getEntity().setData(ModData.COOLDOWN_FIRE, event.getOriginal().getData(ModData.COOLDOWN_FIRE));
+        }if (event.isWasDeath() && event.getOriginal().hasData(ModData.COOLDOWN_UNDYING)) {
+            event.getEntity().setData(ModData.COOLDOWN_UNDYING, event.getOriginal().getData(ModData.COOLDOWN_UNDYING));
         }
 
         if (event.isWasDeath() && event.getOriginal().hasData(ModData.SELECT_ABILITY)) {
