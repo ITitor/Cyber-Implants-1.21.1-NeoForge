@@ -3,6 +3,7 @@ package net.ititor.cyber_implants.event;
 import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ModData;
 import net.ititor.cyber_implants.effect.ModEffects;
+import net.ititor.cyber_implants.gui.CyberImplantsScreen;
 import net.ititor.cyber_implants.network.SyncDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -37,23 +38,8 @@ public class ModEvents {
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         Level level = event.getEntity().level();
-//        if (player.getTags().contains("cyber_0")){
-//            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 1, false, false, false));
-//        }
-//        if (player.getTags().contains("cyber_1")){
-//            if (player.tickCount % 5 == 0) {
-//                for (int x = -10; x <= 10; x++) {
-//                for (int y = -10; y <= 10; y++) {
-//                for (int z = -10; z <= 10; z++) {
-//                    BlockPos pos = new BlockPos(player.blockPosition().getX() + x, player.blockPosition().getY() + y, player.blockPosition().getZ() + z);
-//                    if (level.getBlockState(pos).is(Blocks.COAL_ORE)) {
-//                        ModUtils.spawnParticles(player, level, new OreParticleOptions(0/255f, 0/255f, 0/255f, 1),
-//                        pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5,
-//                        1, 0, 0, 0, 0, false);
-//                    }
-//                }}}
-//            }
-//        }
+
+        cyberLevels(player);
 
         if (!level.isClientSide) {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncDataPacket(player.getData(ModData.EYE_IMPLANT0), 0));
@@ -140,7 +126,7 @@ public class ModEvents {
         }
 
         if (player.getData(ModData.EYE_IMPLANT2) > 0){
-            player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 15, 0, false, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 305, 0, false, false, false));
         }
 
         // Ингибитор Токсинов
@@ -178,6 +164,23 @@ public class ModEvents {
     private static int getDayTime(Level level) {
         return (int)(level.getDayTime() % 24000L);
     }
+
+
+    private static void cyberLevels(Player player){
+        int cyberLevel = player.getData(ModData.CYBER_LEVEL);
+        int cyberPoint = player.getData(ModData.CYBER_POINTS);
+
+        if (!player.level().isClientSide) {
+            int need = (int) (Math.pow(1.25, cyberLevel) * 250);
+            CyberImplantsScreen.need_points = need;
+
+            if (cyberPoint >= need) {
+                player.setData(ModData.CYBER_LEVEL, cyberLevel + 1);
+                player.setData(ModData.CYBER_POINTS, cyberPoint - need);
+            }
+        }
+    }
+
 
     @SubscribeEvent
     public static void onDamageIncoming(LivingIncomingDamageEvent event) {

@@ -36,6 +36,10 @@
   "tooltip.cyber_implants.systemic_implant2": "???(огнестойкость)",
   "tooltip.cyber_implants.systemic_implant3": "Фотосинтезирующая Кожа",
 
+
+  "description.cyber_implants.eye_implant0": "\nПозволяет видеть руды сквозь блоки",
+
+
   "tooltip.cyber_implants.ability0": "Спектральный Анализ",
   "tooltip.cyber_implants.ability1": "Импульсный Ускоритель",
   "tooltip.cyber_implants.ability2": "Клеточный Реконструктор",
@@ -46,6 +50,7 @@
   "tooltip.cyber_implants.ability7": "???(эндер сундук)",
 
   "component.cyber_implants.upgrade": "Улучшить",
+  "component.cyber_implants.missing": "Отсутствует:",
 
   "component.cyber_implants.name": "Name: ",
   "component.cyber_implants.health": "Health: ",

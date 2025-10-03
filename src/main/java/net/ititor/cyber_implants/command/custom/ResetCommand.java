@@ -45,7 +45,8 @@ public class ResetCommand {
         player.setData(ModData.SYSTEMIC_IMPLANT3, 0);
 
 
-//        player.setData(ModData.CYBER_POINTS, 0);
+        player.setData(ModData.CYBER_POINTS, 0);
+        player.setData(ModData.CYBER_LEVEL, 0);
 
 
 //        context.getSource().sendSuccess(() -> {
