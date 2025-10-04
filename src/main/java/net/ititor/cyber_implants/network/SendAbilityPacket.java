@@ -280,7 +280,7 @@ public class SendAbilityPacket implements CustomPacketPayload {
                     }
 
                     //Overload
-                    if (player.getData(ModData.COMBAT_IMPLANT1) > 0 && player.getData(ModData.COOLDOWN6) <= 0 && player.getData(ModData.SELECT_ABILITY) == 6){
+                    if (player.getData(ModData.COMBAT_IMPLANT2) > 0 && player.getData(ModData.COOLDOWN6) <= 0 && player.getData(ModData.SELECT_ABILITY) == 6){
                         if (!level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(5, 5, 5), livingEntity -> livingEntity != player
                                 && !ModUtils.shouldHealEntity((LivingEntity) player, livingEntity)).isEmpty()) {
 
