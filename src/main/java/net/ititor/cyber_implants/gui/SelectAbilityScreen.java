@@ -49,25 +49,46 @@ public class SelectAbilityScreen extends Screen {
     private int selectedItem;
     public ItemRenderer itemRenderer;
 
-    private int numberOfSlices = 8;
-    private int getNumberOfSlices(){
-        int i = 0;
-        if (ClientData.implant[0] > 0){
-            i++;
+    public static int numberOfSlices = 0;
+    public static int[] abilities = {-1,-1,-1,-1,-1,-1,-1,-1};
+    public static int[] activeAbilities = {-1,-1,-1,-1,-1,-1,-1,-1};
+    public static void getNumberOfSlices(){
+        int num = 0;
+
+        abilities[0] = ClientData.implant[0] > 0 ? 0 : -1;
+        abilities[1] = ClientData.implant[5] > 0 ? 1 : -1;
+        abilities[2] = ClientData.implant[9] > 0 ? 2 : -1;
+        abilities[3] = ClientData.implant[10] > 0 ? 3 : -1;
+        abilities[4] = ClientData.implant[11] > 0 ? 4 : -1;
+        abilities[5] = ClientData.implant[13] > 0 ? 5 : -1;
+        abilities[6] = ClientData.implant[14] > 0 ? 6 : -1;
+        abilities[7] = ClientData.implant[17] > 0 ? 7 : -1;
+
+        for (int i = 0; i < abilities.length; i++){
+            if (abilities[i] > -1){
+                num++;
+            }
         }
-        if (ClientData.implant[5] > 0){
-            i++;
+
+        for (int j = 0; j < activeAbilities.length; j++) {
+            for (int i = 0; i < abilities.length; i++) {
+                if (abilities[i] > -1) {
+                    activeAbilities[j] = abilities[i];
+                    abilities[i] = -1;
+                    break;
+                }
+            }
         }
-        if (ClientData.implant[9] > 0){
-            i++;
-        }
-        if (ClientData.implant[10] > 0){
-            i++;
-        }
-        if (ClientData.implant[11] > 0){
-            i++;
-        }
-        return i;
+
+        numberOfSlices = num;
+    }
+
+    private void select(int id){
+        PacketDistributor.sendToServer(new SendSelectAbilityPacket(activeAbilities[id]));
+    }
+
+    private Component text(int id){
+        return Component.translatable("tooltip.cyber_implants.ability"+activeAbilities[id]);
     }
 
 
@@ -130,6 +151,8 @@ public class SelectAbilityScreen extends Screen {
         float radiusOut = (radiusIn+0/**/) * 2;
 
         /**Radius**/
+
+//        getNumberOfSlices();
 
 
         float itemRadius = (radiusIn + radiusOut) * 0.5f;
@@ -226,10 +249,6 @@ public class SelectAbilityScreen extends Screen {
         }
     }
 
-    private Component text(int id){
-        return Component.translatable("tooltip.cyber_implants.ability"+id);
-    }
-
 //    public void drawSecondaryIcons(GuiGraphics ms, int positionXOfPrimaryIcon, int positionYOfPrimaryIcon, List<T> secondarySlotIcons) {
 //        if (!radialMenu.isShowMoreSecondaryItems()) {
 //            drawSecondaryIcon(ms, secondarySlotIcons.get(0), positionXOfPrimaryIcon, positionYOfPrimaryIcon, radialMenu.getSecondaryIconStartingPosition());
@@ -283,7 +302,7 @@ public class SelectAbilityScreen extends Screen {
 //            radialMenu.setCurrentSlot(selectedItem);
 
             /**Select**/
-            PacketDistributor.sendToServer(new SendSelectAbilityPacket(selectedItem));
+            select(selectedItem);
             /**Select**/
 
             minecraft.player.closeContainer();

@@ -36,6 +36,7 @@ public class SendCyberPacket implements CustomPacketPayload {
             if (context.player() instanceof ServerPlayer serverPlayer) {
                 if (packet.id == 0) {
                     serverPlayer.setData(ModData.EYE_IMPLANT0, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 0);
                 }if (packet.id == 1) {
                     serverPlayer.setData(ModData.EYE_IMPLANT1, packet.implant);
                 }if (packet.id == 2) {
@@ -48,6 +49,7 @@ public class SendCyberPacket implements CustomPacketPayload {
                     serverPlayer.setData(ModData.BODY_IMPLANT1, packet.implant);
                 }if (packet.id == 5) {
                     serverPlayer.setData(ModData.BODY_IMPLANT2, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 1);
                 }if (packet.id == 6) {
                     serverPlayer.setData(ModData.BODY_IMPLANT3, packet.implant);
                 }if (packet.id == 7) {
@@ -58,18 +60,23 @@ public class SendCyberPacket implements CustomPacketPayload {
 
                 if (packet.id == 9) {
                     serverPlayer.setData(ModData.NEURAL_IMPLANT0, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 2);
                 }if (packet.id == 10) {
                     serverPlayer.setData(ModData.NEURAL_IMPLANT1, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 3);
                 }if (packet.id == 11) {
                     serverPlayer.setData(ModData.NEURAL_IMPLANT2, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 4);
                 }
 
                 if (packet.id == 12) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT0, packet.implant);
                 }if (packet.id == 13) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT1, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 5);
                 }if (packet.id == 14) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT2, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 6);
                 }if (packet.id == 15) {
                     serverPlayer.setData(ModData.COMBAT_IMPLANT3, packet.implant);
                 }
@@ -78,6 +85,7 @@ public class SendCyberPacket implements CustomPacketPayload {
                     serverPlayer.setData(ModData.SYSTEMIC_IMPLANT0, packet.implant);
                 }if (packet.id == 17) {
                     serverPlayer.setData(ModData.SYSTEMIC_IMPLANT1, packet.implant);
+                    serverPlayer.setData(ModData.SELECT_ABILITY, 7);
                 }if (packet.id == 18) {
                     serverPlayer.setData(ModData.SYSTEMIC_IMPLANT2, packet.implant);
                 }if (packet.id == 19) {

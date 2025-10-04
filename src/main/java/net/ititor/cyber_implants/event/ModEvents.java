@@ -4,6 +4,7 @@ import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ModData;
 import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.gui.CyberImplantsScreen;
+import net.ititor.cyber_implants.gui.SelectAbilityScreen;
 import net.ititor.cyber_implants.network.SyncDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -160,6 +161,11 @@ public class ModEvents {
                 }
             }
         }
+
+        /**Number of Slices**/
+        SelectAbilityScreen.getNumberOfSlices();
+        /**Number of Slices**/
+
     }
     private static int getDayTime(Level level) {
         return (int)(level.getDayTime() % 24000L);

@@ -84,7 +84,7 @@ public class KeyBindingEvent {
                 PacketDistributor.sendToServer(new SendAbilityPacket(1));
                 ClientData.cooldown[1] = SendAbilityPacket.cd1;
             }
-            if (ABILITY1.isDown() && (ClientData.implant[0] > 0 || ClientData.implant[5] > 0 || ClientData.implant[9] > 0 || ClientData.implant[10] > 0 || ClientData.implant[11] > 0 || ClientData.implant[17] > 0)){
+            if (ABILITY1.isDown() && SelectAbilityScreen.numberOfSlices > 0){
                 try {
                     if (Minecraft.getInstance().screen == null){
                         Minecraft.getInstance().setScreen(new SelectAbilityScreen());

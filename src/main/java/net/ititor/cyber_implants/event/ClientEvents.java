@@ -9,6 +9,7 @@ import net.ititor.cyber_implants.CyberImplants;
 import net.ititor.cyber_implants.data.ClientData;
 import net.ititor.cyber_implants.effect.ModEffects;
 import net.ititor.cyber_implants.gui.CyberImplantsScreen;
+import net.ititor.cyber_implants.gui.SelectAbilityScreen;
 import net.ititor.cyber_implants.util.ModUtils;
 import net.minecraft.Util;
 import net.minecraft.client.KeyMapping;
@@ -163,7 +164,7 @@ public class ClientEvents {
                     }
                 }
 
-                if (ClientData.implant[0] > 0 || ClientData.implant[5] > 0 || ClientData.implant[9] > 0 || ClientData.implant[10] > 0 || ClientData.implant[11] > 0 || ClientData.implant[17] > 0){
+                if (SelectAbilityScreen.numberOfSlices > 0){
                     render2Ability(gui, KeyBindingEvent.ABILITY, KeyBindingEvent.ABILITY1, ClientData.selectAbility);
                 }
 
